@@ -8,6 +8,7 @@ dotev.config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var homeRouter = require('./routes/screen/home');
 
 
 var aceRouter = require('./routes/acedemics');
@@ -43,6 +44,7 @@ app.use(express.static("styles"));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/home', homeRouter);
 
 app.use('/acedemics', aceRouter);
 app.use('/careers', careerRouter);

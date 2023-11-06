@@ -9,6 +9,12 @@ router.get('/all-lis-post', async function (req, res, next) {
     const data = await postModel.find();
     res.json(data);
 });
+//lấy danh sách theo id
+router.get('/list-by-id', async function (req, res, next) {
+    var id = req.query.id;
+    const data = await postModel.findById(id);
+    res.json(data);
+});
 
 //Lấy danh sách posts theo user_id
 router.get('/list-by-user', async function (req, res, next) {
