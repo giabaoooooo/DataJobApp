@@ -3,9 +3,13 @@ var router = express.Router();
 var postModel = require('../modules/post');
 const cloudinary = require('../utilis/cloudinary');
 const upload = require('../Multer/Multer');
+const ImageModel = require('../modules/Image');
+const fs = require('fs');
+const dotenv = require('dotenv');
+dotenv.config();
 
 //lấy danh sách
-router.get('/all-lis-post', async function (req, res, next) {
+router.get('/all-list-post', async function (req, res, next) {
     const data = await postModel.find();
     res.json(data);
 });
@@ -55,6 +59,7 @@ router.get('/lis-post-approved', async function (req, res, next) {
     }
 });
 
+
 //thêm mới
 router.post('/add-post',upload.single('image'), async function (req, res, next) {
     try {
@@ -84,5 +89,10 @@ router.post('/add-post',upload.single('image'), async function (req, res, next) 
         console.error(error);
     }
 });
+
+
+
+
+    
 
 module.exports = router;
