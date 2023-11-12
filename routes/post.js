@@ -8,6 +8,7 @@ const fs = require('fs');
 const dotenv = require('dotenv');
 dotenv.config();
 
+
 //lấy danh sách
 router.get('/all-list-post', async function (req, res, next) {
     const data = await postModel.find();
@@ -90,6 +91,12 @@ router.post('/add-post',upload.single('image'), async function (req, res, next) 
     }
 });
 
+
+
+
+router.get('/', function (req, res, next) {
+    res.render('dashboard', { title: 'Dashboard' });
+});
 
 
 

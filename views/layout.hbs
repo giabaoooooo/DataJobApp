@@ -2,9 +2,24 @@
 <html>
   <head>
     <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='styles/home.css' />
+
+    <link href="styles/boostrap.css" rel="stylesheet" />
+
+    <link href="styles/home.css" rel="stylesheets"/>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   </head>
   <body>
     {{{body}}}
+
+    <!-- FOOTER SECTION END-->
+    <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+    <!-- CORE JQUERY  -->
+    {{!-- <script src="/javascripts/jquery-1.10.2.js"></script> --}}
+    <!-- BOOTSTRAP SCRIPTS  -->
+    {{!-- <script src="/javascripts/bootstrap.js"></script> --}}
+    <!-- CUSTOM SCRIPTS  -->
+    <!-- <script src="/javascripts/custom.js"></script> -->
   </body>
 </html>

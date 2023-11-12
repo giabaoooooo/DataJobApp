@@ -2,6 +2,11 @@ const jwt = require('jsonwebtoken');
 var express = require('express');
 var router = express.Router();
 const user = require('../modules/user');
+
+//get layout login
+router.get('/', function(req, res, next) {
+  res.render('login', { title: 'Login Admin' });
+});
 /* GET users listing. */
 router.get('/list', async function (req, res, next) {
   const users = await user.find();
