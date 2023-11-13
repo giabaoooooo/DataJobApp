@@ -10,9 +10,9 @@ dotenv.config();
 
 
 //lấy danh sách
-router.get('/all-list-post', async function (req, res, next) {
+router.get('/', async function (req, res, next) {
     const data = await postModel.find();
-    res.json(data);
+    res.render('dashboard/post_allow', { posts: data });
 });
 //lấy danh sách theo id
 router.get('/list-by-id', async function (req, res, next) {

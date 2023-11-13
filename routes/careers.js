@@ -9,7 +9,7 @@ const careerController = require('../controller/careerController');
 //lấy danh sách career
 router.get('/', async function (req, res, next) {
   const data = await careerModel.find();
-  res.render('index', { careers: data });
+  res.render('careers/list', { careers: data });
 });
 
 //thêm mới career
@@ -24,6 +24,18 @@ router.post('/add', upload.single('image'), async function (req, res, next) {
     res.json({ message: "Thêm mới thành công", data: data });
   } catch (error) {
     console.error(error);
+  }
+});
+
+
+//delete
+router.delete('/:id', async function (req, res, next) {
+  try {
+    var id = req.query.id;
+    const data = await careerModel.findByIdAndDelete(id);
+    res.json({ message: "Xóa thành công", data: data });
+  } catch (error) {
+    res.json({ message: "Xóa thất bại", data: error });
   }
 });
 
