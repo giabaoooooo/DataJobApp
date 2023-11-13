@@ -29,31 +29,28 @@ router.get('/list-by-user', async function (req, res, next) {
 });
 
 //lấy danh sách theo status_id
-router.get('/lis-post-waiting', async function (req, res, next) {
+router.get('/post-waiting', async function (req, res, next) {
     try {
-        var id = req.query.id;
-        const data = await postModel.find({ users_id: id, status_ID: "65423efa3f8e779b5ec14e51" });//đang chờ duyệt
-        res.json(data);
+        const data = await postModel.find({ status_id: "65423efa3f8e779b5ec14e51" });//đang chờ duyệt
+        res.render('dashboard/post_waiting', { posts: data });
         return data;
     } catch (error) {
         console.error(error);
     }
 });
-router.get('/lis-post-denied', async function (req, res, next) {
+router.get('/post-denied', async function (req, res, next) {
     try {
-        var id = req.query.id;
-        const data = await postModel.find({ users_id: id, status_ID: "65447e3996c02dcf49965472" });//Từ chối duyệt
-        res.json(data);
+        const data = await postModel.find({ status_id: "65447e3996c02dcf49965472" });//Từ chối duyệt
+        res.render('dashboard/post_denied', { posts: data });
         return data;
     } catch (error) {
         console.error(error);
     }
 });
-router.get('/lis-post-approved', async function (req, res, next) {
+router.get('/post-allow', async function (req, res, next) {
     try {
-        var id = req.query.id;
-        const data = await postModel.find({ users_id: id, status_ID: "65447e2296c02dcf49965471" });//đã duyệt
-        res.json(data);
+        const data = await postModel.find({ status_id: "65447e2296c02dcf49965471" });//đã duyệt
+        res.render('dashboard/post_allow', { posts: data });
         return data;
     } catch (error) {
         console.error(error);
@@ -62,7 +59,7 @@ router.get('/lis-post-approved', async function (req, res, next) {
 
 
 //thêm mới
-router.post('/add-post',upload.single('image'), async function (req, res, next) {
+router.post('/add-post', upload.single('image'), async function (req, res, next) {
     try {
         const result = await cloudinary.uploader.upload(req.file.path);
         const data = new postModel({
@@ -91,15 +88,33 @@ router.post('/add-post',upload.single('image'), async function (req, res, next) 
     }
 });
 
+//thay đổi status từ đang chờ duyệt thành đã được duyệt
+router.put('/allow', async function (req, res, next) {
+    var id = req.query.status_id;
+    const data = await postModel.findByIdAndUpdate({ id: "65447e2296c02dcf49965471" });
+    res.render('dashboard/post_allow', { posts: data });
+});
 
+//lấy thông tin chi tiết post
+router.get('/detail', async function (req, res, next) {
+    var id = req.query.id;
+    const data = await postModel.findById({_id: id});
+    res.json(data);
+});
 
-
-router.get('/', function (req, res, next) {
-    res.render('dashboard', { title: 'Dashboard' });
+//auto update status_id when click
+router.put('/update-status', async function (req, res, next) {
+    var id = req.query.id;
+    const data = await postModel.findByIdAndUpdate(id, {
+        status_id: "65447e2296c02dcf49965471",
+    });
+    res.json({ message: "Cập nhật thành công", data: data });
 });
 
 
 
-    
+
+
+
 
 module.exports = router;

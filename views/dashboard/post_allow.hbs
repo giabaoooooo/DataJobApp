@@ -14,11 +14,13 @@
     <div class="row">
         <div class="col-md-12">
             <!-- Advanced Tables -->
+            <button type="button" class="btn btn-outline-success" onclick="postAllow('{{this.status_id}}')">Bài đăng đã được duyệt</button>
+            <button type="button" class="btn btn-outline-success" onclick="postDenied('{{this.status_id}}')">Bài đăng không được duyệt</button>
+            <button type="button" class="btn btn-outline-success" onclick="postWaiting('{{this.status_id}}')">Bài đăng đang chờ duyệt</button>
             <div class="panel panel-default">
                 <div class="panel-heading" style="color: white;">
-                    - Quản lý ngành nghề -
+                    - Danh sách các bài đăng đã được duyệt -
                 </div>
-                <button type="button" class="btn btn-primary">Thêm mới ngành nghề</button>
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -55,6 +57,19 @@
             <!--End Advanced Tables -->
         </div>
     </div>
+
+
+    <script>
+    const postAllow = (id) => {
+      window.location.href = `/posts/post-allow?id=${id}`;
+    }
+    const postWaiting = (id) => {
+      window.location.href = `/posts/post-waiting?id=${id}`;
+    }
+    const postDenied = (id) => {
+      window.location.href = `/posts/post-denied?id=${id}`;
+    }
+  </script>
 </body>
 
 </html>

@@ -30,16 +30,10 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Users</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Bài Đăng
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/posts">Đã được duyệt</a></li>
-              <li><a class="dropdown-item" href="#">Đang chờ duyệt</a></li>
-              <li><a class="dropdown-item" href="#">Không được duyệt</a></li>
-            </ul>
+          <li class="nav-item">
+            <a class="nav-link" href="/posts/post-allow">Bài Đăng</a>
           </li>
+          
           <li class="nav-item">
             <a class="nav-link" href="/careers">Quản Lý Ngành nghề</a>
           </li>
@@ -68,6 +62,18 @@
   <script src="/javascripts/bootstrap.js"></script> --}}
   <!-- CUSTOM SCRIPTS  -->
   <!-- <script src="/javascripts/custom.js"></script> -->
+
+  <script>
+    const postAllow = (id) => {
+      window.location.href = `/posts/post-allow?id=${id}`;
+    }
+    const postWaiting = (id) => {
+      window.location.href = `/posts/post-waiting?id=${id}`;
+    }
+    const postDenied = (id) => {
+      window.location.href = `/posts/post-denied?id=${id}`;
+    }
+  </script>
 </body>
 
 </html>

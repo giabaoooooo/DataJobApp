@@ -18,4 +18,13 @@ router.post('/add', async function(req, res, next) {
   res.json(data);
 });
 
+//update
+router.put('/:id', async function(req, res, next) {
+  var id = req.query.id;
+  const data = await experienceModel.findByIdAndUpdate(id, {
+    e_title: req.body.e_title,
+  });
+  res.json({message: "Cập nhật thành công", data: data});
+});
+
 module.exports = router;
