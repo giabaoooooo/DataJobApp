@@ -1,4 +1,3 @@
-const { model } = require('mongoose');
 const careerModel = require('../modules/career');
 
 
@@ -26,6 +25,15 @@ exports.add = async (c_title, image) => {
         console.log(error);
     }
 }
+//get detail by _id
+exports.getDetail = async (id) => {
+    try {
+        const data = await careerModel.findById({ id });
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 //delete
 exports.delete = async (id,res,req) => {
@@ -45,11 +53,12 @@ exports.delete = async (id,res,req) => {
 }
 
 
-//get detail by _id
-exports.getDetail = async (id) => {
+
+//edit career
+exports.findbyId = async (_id) => {
     try {
-        const data = await careerModel.findById({ id });
-        return data;
+        let careers = await careerModel.findOne({  _id });
+        return careers;
     } catch (error) {
         console.log(error);
     }
