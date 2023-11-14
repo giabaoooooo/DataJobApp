@@ -68,7 +68,7 @@
             })
                 .then(async (willDelete) => {
                     if (willDelete) {
-                        let url = `/careers/${id}`;
+                        let url = `/careers/delete/${id}`;
                         let option = {
                             method: 'DELETE'
                         }
@@ -88,6 +88,11 @@
                     }
                 });
         }
+
+        const demo = (id) => {
+            window.location.href = `/careers/delete/${id}` ;
+        }
+
     </script>
 </body>
 
