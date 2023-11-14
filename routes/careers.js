@@ -64,19 +64,19 @@ router.delete('/delete/:id', async function (req, res, next) {
 });
 
 //update career
-// router.put('/:id', upload.single('image'), async function (req, res, next) {
-//   try {
-//     var id = req.query.id;
-//     const result = await cloudinary.uploader.upload(req.file.path);
-//     const data = await careerModel.findByIdAndUpdate(id, {
-//       c_title: req.body.c_title,
-//       image: result.secure_url,
-//     });
-//     res.json({ message: "Cập nhật thành công", data: data });
-//   } catch (error) {
-//     res.json({ message: "Cập nhật thất bại", data: error });
-//   }
-// });
+router.get('/:id', upload.single('image'), async function (req, res, next) {
+  try {
+    var id = req.query.id;
+    const result = await cloudinary.uploader.upload(req.file.path);
+    const data = await careerModel.findByIdAndUpdate(id, {
+      c_title: req.body.c_title,
+      image: result.secure_url,
+    });
+    res.json({ message: "Cập nhật thành công", data: data });
+  } catch (error) {
+    res.json({ message: "Cập nhật thất bại", data: error });
+  }
+});
 
 
 module.exports = router;
