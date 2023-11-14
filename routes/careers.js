@@ -5,6 +5,7 @@ const careerModel = require('../modules/career');
 const cloudinary = require('../utilis/cloudinary');
 const upload = require('../Multer/Multer');
 const careerController = require('../controller/careerController');
+const ObjectId = require('mongodb').ObjectId;
 
 //lấy danh sách career
 // router.get('/', async function (req, res, next) {
@@ -53,7 +54,7 @@ router.delete('/delete/:id', async function (req, res, next) {
 
     if (result.deletedCount === 1) {
       console.log("Xóa thành công");
-      res.redirect('/');
+      res.render('careers/list');
 
     } else {
       console.log("Xóa không thành công");
@@ -63,20 +64,31 @@ router.delete('/delete/:id', async function (req, res, next) {
   }
 });
 
+router.get('/edit/:id', async (req, res, next)=> { 
+  console.log("Trang sửa");
+  let _id = req.params.id;
+  // try {
+  //   let career = await careerController.findbyId(id);
+  //   res.render('careers/edit', { careers: career })
+  // } catch (error) {
+  //   console.log(error);
+  // }
+});
+
 //update career
-// router.put('/:id', upload.single('image'), async function (req, res, next) {
-//   try {
-//     var id = req.query.id;
-//     const result = await cloudinary.uploader.upload(req.file.path);
-//     const data = await careerModel.findByIdAndUpdate(id, {
-//       c_title: req.body.c_title,
-//       image: result.secure_url,
-//     });
-//     res.json({ message: "Cập nhật thành công", data: data });
-//   } catch (error) {
-//     res.json({ message: "Cập nhật thất bại", data: error });
-//   }
-// });
+router.put('/:id', upload.single('image'), async function (req, res, next) {
+  console.log("đã sửa");
+  let id = req.params.id;
+  let { c_title, img } = req.body;
+  try {
+    img = await cloudinary.uploader.upload(req.file.path);
+    await careerController.edit(id, c_title, img.secure_url);
+    res.redirect('/careers');
+    console.log("Sửa thành công");
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 
 module.exports = router;
