@@ -5,7 +5,6 @@ const careerModel = require('../modules/career');
 const cloudinary = require('../utilis/cloudinary');
 const upload = require('../Multer/Multer');
 const careerController = require('../controller/careerController');
-const ObjectId = require('mongodb').ObjectId;
 
 //lấy danh sách career
 // router.get('/', async function (req, res, next) {
@@ -39,7 +38,7 @@ router.post('/add', upload.single('image'), async function (req, res, next) {
     img = await cloudinary.uploader.upload(req.file.path);
     await careerController.add(c_title, img.secure_url);
     res.redirect('/careers');
-    console.log("Thêm mới thành công");
+    console.log(img);
   } catch (error) {
     console.error(error);
   }
@@ -64,30 +63,31 @@ router.delete('/delete/:id', async function (req, res, next) {
   }
 });
 
-router.get('/edit/:id', async (req, res, next)=> { 
+router.get('/:id', async (req, res, next)=> { 
   console.log("Trang sửa");
   let _id = req.params.id;
-  // try {
-  //   let career = await careerController.findbyId(id);
-  //   res.render('careers/edit', { careers: career })
-  // } catch (error) {
-  //   console.log(error);
-  // }
+  try {
+    let career = await careerController.findbyId(_id);
+    res.render('careers/edit', { careers : career})
+  } catch (error) {
+    console.log(error);
+  }
+  
 });
 
 //update career
-router.put('/:id', upload.single('image'), async function (req, res, next) {
-  console.log("đã sửa");
+router.put('/edit/:id', upload.single('image'), async function (req, res, next) {
   let id = req.params.id;
-  let { c_title, img } = req.body;
-  try {
-    img = await cloudinary.uploader.upload(req.file.path);
-    await careerController.edit(id, c_title, img.secure_url);
-    res.redirect('/careers');
-    console.log("Sửa thành công");
-  } catch (error) {
-    console.error(error);
-  }
+  // let { c_title, img } = req.body;
+  // try {
+  //   img = await cloudinary.uploader.upload(req.file.path);
+  //   await careerController.update(id, c_title, img.secure_url);
+  //   res.redirect('/careers');
+  //   console.log(img);
+  // } catch (error) {
+  //   console.error(error);
+  // }
+  console.log(id);
 });
 
 
