@@ -44,7 +44,7 @@
                                     <td><img width="200" height="200" src="{{this.image}}" alt=""></td>
                                     <td>
                                         <button type="button" class="btn btn-success" onclick="AllowPost('{{this.id}}')">Duyệt Bài</button>
-                                        <button type="button" class="btn btn-danger" onclick="confirmDelete('{{this._id}}')">Xoá</button>
+                                        <button type="button" class="btn btn-danger" onclick="AllowPost('{{this.id}}')">Xoá</button>
                                     </td>
                                 </tr>
                                 {{/each}}
@@ -71,7 +71,7 @@
         }
 
         const AllowPost = (id) =>{
-            window.location.href = `/posts/update-status?id=${id}`;
+            window.location.href = `/posts/${id}/change-status`;
         }
     </script>
 </body>
