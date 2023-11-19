@@ -20,19 +20,17 @@
                             PRODUCT FORM
                         </div>
                         <div class="panel-body">
-                            <h1>hELLO</h1>
-                            {{!-- <form method="put" action="/careers/edit/{{careers._id}}" enctype="multipart/form-data">
+                            <form method="post" action="/careers/add" enctype="multipart/form-data">
 
-                                <input type="text" name="c_title" value="{{careers.c_title}}" placeholder="Tên ngành nghề" /> <br />
+                                <input type="text" name="c_title" value="{{careers.c_title}}"
+                                    placeholder="Tên ngành nghề" /> <br />
+                                <label class="form-label" for="customFile">Default file input example</label>
+                                {{!-- <input type="file" name="image" onchange="loadFile(event)" /> <br /> --}}
+                                <img width="300" height="250" id="image" alt="Image" src="{{careers.image}}" /> <br />
+                                <input type="file" class="form-control" name="image" />
 
-                                {{!-- <input type="file" name="image" onchange="loadFile(event)" /> <br />
-                                <img width="300" height="250" id="image" alt="Image" src="{{careers.image}}" /> <br /> --}}
-
-                                {{!-- <label class="form-label" for="customFile">Default file input example</label>
-                                <input type="file" class="form-control" name="image" /> --}}
-
-                                {{!-- <input type="submit" value="Edit" />
-                            </form>  --}}
+                                <input type="submit" value="Edit" />
+                            </form>
                         </div>
                     </div>
 
@@ -45,7 +43,7 @@
                 reader.onload = function () {
                     var output = document.getElementById('image');
                     output.src = reader.result;
-                    {{!-- console.log(event.target.files[0]); --}}
+                    { { !--console.log(event.target.files[0]); --} }
                 };
                 reader.readAsDataURL(event.target.files[0]);
             };
