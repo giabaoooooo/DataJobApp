@@ -68,6 +68,7 @@ router.post('/add', [upload.single('image'),], async function (req, res, next) {
   console.log(req.body);
 
   try {
+    console.log(req.file);
     img = await cloudinary.uploader.upload(req.file.path);
     await careerController.add(c_title, img.secure_url);
     // res.redirect('/careers');

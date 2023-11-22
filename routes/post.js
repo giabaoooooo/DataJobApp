@@ -150,12 +150,13 @@ router.post('/add-post', upload.single('image'), async function (req, res, next)
             status_id: req.body.status_id,
         });
         await data.save();
-        res.json({message:"Thêm post thành công", data: data});
+        res.json({ message: "Thêm post thành công", data: data });
         console.log(result.secure_url);
     } catch (error) {
         console.error(error);
     }
 });
+
 
 
 
@@ -184,6 +185,37 @@ router.get('/:id/change-status', async (req, res, next) => {
     }
 });
 
+//App
+router.post('/upload', upload.array('images', 5), async (req, res) => {
+    try {
+        
+        try {
+            const uploader = async (path) => {
+                const result = await cloudinary.uploader.upload(path, { folder: 'Images' });
+                return result.secure_url;
+            }
+            const urls = [];
+            const files = req.body.postImage._parts;
+            console.log(files);
+            for (const file of files) {
+                const { path } = file;
+                const newPath = await uploader(path);
+                urls.push(newPath);
+                fs.unlinkSync(path);
+            }
+            console.log("successfully");
+            res.status(200).json({
+                message: "Upload thành công",
+                data: urls,
+            })
+        } catch (error) {
+            console.log(error);
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+});
 //delete post
 router.get('/delete/:id', async (req, res, next) => {
     let id = req.params.id;
