@@ -7,20 +7,14 @@ const ImageModel = require('../modules/Image');
 const fs = require('fs');
 const dotenv = require('dotenv');
 dotenv.config();
-const postController = require('../controller/postController');
+const PostController = require('../controller/PostController');
 
-
-//lấy danh sách
-router.get('/list', async function (req, res, next) {
-    const data = await postModel.find();
-    res.json(data)
-});
-//lấy danh sách theo id
-router.get('/list-by-id', async function (req, res, next) {
-    var id = req.query.id;
-    const data = await postModel.findById(id);
-    res.json(data);
-});
+// //lấy danh sách theo id
+// router.get('/list-by-id', async function (req, res, next) {
+//     var id = req.query.id;
+//     const data = await postModel.findById(id);
+//     res.json(data);
+// });
 
 //Lấy danh sách posts theo user_id
 router.get('/list-by-user', async function (req, res, next) {
@@ -179,7 +173,44 @@ router.get('/:id/change-status', async (req, res, next) => {
     }
 });
 
-//App
+//--------------------------------------------------------------------------------- APP -------------------------------------------------------------------------
+
+//Lấy danh sách tất cả bài đăng đã được duyệt
+router.get('/list', async function (req, res, next) {
+    const data = await postModel.find();
+    res.json(data)
+});
+
+//Lấy danh sách bài đăng đã lưu của user
+router.post('/listSaveJobsForApp', async function (req, res, next) {
+    const data = await PostController.getById(req.body.UserID);
+    res.json(data)
+});
+
+//Tìm kiếm bằng từ khóa
+router.post('/searchByKeyForApp', async function (req, res) {
+    const data = await PostController.searchByKey(req.body.key);
+    res.json(data)
+    console.log(data);
+});
+
+//Lấy danh sách bài đăng của user đang hiện thị
+router.get('/listJobsIsDisplayForApp', async function (req, res, next) {
+    const data = await PostController.getByIsDisplayStatus();
+    res.json(data)
+});
+//Lấy danh sách bài đăng của user đang chờ duyệt
+router.get('/listJobsWaitingForApp', async function (req, res, next) {
+    const data = await PostController.getByWaitingStatus();
+    res.json(data)
+});
+//Lấy danh sách bài đăng của user bị từ chối
+router.get('/listJobsDeniedForApp', async function (req, res, next) {
+    const data = await PostController.getByDeniedStatus();
+    res.json(data)
+});
+
+//Đăng tin
 router.post('/upload', upload.array('images', 5), async (req, res) => {
     try {
         
