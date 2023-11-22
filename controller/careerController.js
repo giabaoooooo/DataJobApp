@@ -64,4 +64,21 @@ exports.findbyId = async (_id) => {
     }
 }
 
+//update career
+exports.update = async (id, c_title, image) => {
+    console.log(image);
+    try {
+        const data = await careerModel.findByIdAndUpdate( id , {
+            c_title,
+            image
+        });
+        console.log("Sửa thành công");
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+
 
