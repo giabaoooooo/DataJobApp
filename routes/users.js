@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 var express = require('express');
 var router = express.Router();
 const user = require('../modules/user');
+const cv = require('../modules/cv');
+const userController = require('../controller/usersController');
 
 //get layout login
 router.get('/', function(req, res, next) {
@@ -17,6 +19,7 @@ router.get('/list', async function (req, res, next) {
 //nếu nhập đúng thông tin đăng nhập sẽ hiển thị thông báo và trả về token
 router.post('/login', async function (req, res, next) {
   const users = await user.find();
+  const cvs = await cv.find();
   const phone = req.body.phone;
   const password = req.body.password;
   const userLogin = users.find(user => user.phone === phone && user.password === password);
@@ -26,7 +29,8 @@ router.post('/login', async function (req, res, next) {
       message: 'Đăng nhập thành công',
       success: true,
       token: token,
-      userInfor: userLogin
+      userInfor: userLogin,
+      cv: cvs
     });
   } else {
     res.json({

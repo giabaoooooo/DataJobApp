@@ -10,6 +10,9 @@ dotenv.config();
 const postController = require('../controller/postController');
 
 
+//upload array images
+
+
 //lấy danh sách
 router.get('/list', async function (req, res, next) {
     const data = await postModel.find();
@@ -33,7 +36,8 @@ router.get('/list-by-user', async function (req, res, next) {
 router.get('/post-waiting', async function (req, res, next) {
     try {
         const data = await postModel.find({ status_id: "65423efa3f8e779b5ec14e51" });//đang chờ duyệt
-        res.render('dashboard/post_waiting', { posts: data });
+        // res.render('dashboard/post_waiting', { posts: data });
+        res.json({ message: "Lấy danh sách thành công", data: data });
         console.log(data);
         return data;
     } catch (error) {
@@ -43,7 +47,8 @@ router.get('/post-waiting', async function (req, res, next) {
 router.get('/post-denied', async function (req, res, next) {
     try {
         const data = await postModel.find({ status_id: "65447e3996c02dcf49965472" });//Từ chối duyệt
-        res.render('dashboard/post_denied', { posts: data });
+        // res.render('dashboard/post_denied', { posts: data });
+        res.json({ message: "Lấy danh sách thành công", data: data });
         return data;
     } catch (error) {
         console.error(error);
@@ -52,7 +57,8 @@ router.get('/post-denied', async function (req, res, next) {
 router.get('/post-allow', async function (req, res, next) {
     try {
         const data = await postModel.find({ status_id: "65447e2296c02dcf49965471" });//đã duyệt
-        res.render('dashboard/post_allow', { posts: data });
+        // res.render('dashboard/post_allow', { posts: data });
+        res.json({ message: "Lấy danh sách thành công", data: data });
         return data;
     } catch (error) {
         console.error(error);
@@ -178,10 +184,21 @@ router.get('/:id/change-status', async (req, res, next) => {
     }
 });
 
-
-
-
-
-
+//delete post
+router.get('/delete/:id', async (req, res, next) => {
+    let id = req.params.id;
+    try {
+        const data = await postModel.deleteOne({ _id: id });
+        if (data.deletedCount === 1) {
+            console.log("Xóa thành công");
+            res.json({ status: true });
+        } else { 
+            console.log("Xóa không thành công");
+            res.json({ status: false });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 module.exports = router;

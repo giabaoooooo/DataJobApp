@@ -18,8 +18,15 @@ router.post('/add', async function(req, res, next) {
   res.json(data);
 });
 
+//get detail
+router.get('/detail', async function (req, res, next) { 
+  let id = req.params.id;
+  const data = await experienceModel.findById({_id: id});
+  res.json(data);
+});
+
 //update
-router.put('/:id', async function(req, res, next) {
+router.put('edit/:id', async function(req, res, next) {
   var id = req.query.id;
   const data = await experienceModel.findByIdAndUpdate(id, {
     e_title: req.body.e_title,
