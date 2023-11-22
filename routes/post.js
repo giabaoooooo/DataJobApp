@@ -103,12 +103,13 @@ router.get('/detail', async function (req, res, next) {
 });
 
 //auto update status_id when click
-router.put('/update-status', async function (req, res, next) {
+router.get('/update-status', async function (req, res, next) {
     var id = req.query.id;
-    const data = await postModel.findByIdAndUpdate(id, {
-        status_id: "65447e2296c02dcf49965471",
-    });
-    res.json({ message: "Cập nhật thành công", data: data });
+    console.log("Da toi day @@@@@@@");
+    // const data = await postModel.findByIdAndUpdate(id, {
+    //     status_id: "65447e2296c02dcf49965471",
+    // });
+    // res.json({ message: "Cập nhật thành công", data: data });
 });
 
 

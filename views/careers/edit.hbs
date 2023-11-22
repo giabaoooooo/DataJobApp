@@ -24,9 +24,6 @@
 
                                 <input type="text" name="c_title" value="{{careers.c_title}}" placeholder="Tên ngành nghề" /> <br />
 
-                                {{!-- <input type="file" name="image" onchange="loadFile(event)" /> <br />
-                                <img width="300" height="250" id="image" alt="Image" src="{{careers.image}}" /> <br /> --}}
-
                                 <label class="form-label" for="customFile">Default file input example</label>
                                 <input type="file" class="form-control" name="image" />
 
@@ -39,15 +36,6 @@
             </div>
         </div>
         <script>
-            const loadFile = function (event) {
-                const reader = new FileReader();
-                reader.onload = function () {
-                    var output = document.getElementById('image');
-                    output.src = reader.result;
-                    {{!-- console.log(event.target.files[0]); --}}
-                };
-                reader.readAsDataURL(event.target.files[0]);
-            };
         </script>
 </body>
 
