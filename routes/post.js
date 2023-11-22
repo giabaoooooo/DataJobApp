@@ -15,7 +15,7 @@ const postController = require('../controller/postController');
 
 //lấy danh sách
 router.get('/list', async function (req, res, next) {
-    const data = await postModel.find();
+    const data = await postModel.find().populate('users_id').populate('career_id').populate('payform_id').populate('experience_id').populate('acedemic_id').populate('worktype_id').populate('status_id');
     res.json(data)
 });
 //lấy danh sách theo id
@@ -127,31 +127,33 @@ router.get('/post-allow', async function (req, res, next) {
 // });
 
 
-router.post('/add-post', upload.single('image'), async function (req, res, next) {
+router.post('/add-post', async function (req, res, next) {
+    const ObjectId = "6550adfb9e1d1755f2d42ae0";
     try {
-        const result = await cloudinary.uploader.upload(req.file.path);
+        const array = ["https://res.cloudinary.com/dxrv1gdit/image/upload/v1700661118/Part-timeJobs/iwmsamz5qz9lhgpmflcc.jpg", "https://res.cloudinary.com/dxrv1gdit/image/upload/v1700661118/Part-timeJobs/ttd2ulrtwnvlkjdml7n2.jpg"];
         const data = new postModel({
-            users_id: req.body.users_id,
-            andress: req.body.andress,
-            business_name: req.body.business_name,
-            image: result.secure_url,
-            quantity: req.body.quantity,
-            title: req.body.title,
-            career_id: req.body.career_id,
-            payform_id: req.body.payform_id,
-            experience_id: req.body.experience_id,
-            acedemic_id: req.body.acedemic_id,
-            worktype_id: req.body.worktype_id,
-            describe: req.body.describe,
-            age_min: req.body.age_min,
-            age_max: req.body.age_max,
-            wage_min: req.body.wage_min,
-            wage_max: req.body.Wage_max,
-            status_id: req.body.status_id,
+            users_id: "353e5a3a8e88b23b41388e2f",
+            andress: "213 Thoại Ngọc Hầu",
+            business_name: "CTY AGG 22fwfw",
+            image: array,
+            quantity: 3,
+            title: "React Native",
+            career_id: "6554b9ce22054e51b8327168",
+            payform_id: "653e66f58e88b23b41388e3d",
+            experience_id: "653e64198e88b23b41388e38",
+            acedemic_id: "653e661f8e88b23b41388e3b",
+            worktype_id: "653e66b38e88b23b41388e3c",
+            describe: "Ko cos gif",
+            age_min: 23,
+            age_max: 25,
+            wage_min: 100,
+            wage_max: 200,
+            status_id: "65423efa3f8e779b5ec14e51",
+            
         });
         await data.save();
         res.json({ message: "Thêm post thành công", data: data });
-        console.log(result.secure_url);
+        // console.log(result.secure_url);
     } catch (error) {
         console.error(error);
     }

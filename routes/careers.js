@@ -40,10 +40,10 @@ router.post('/upload-image', upload.array('images', 5), async function (req, res
 //   const data = await careerModel.find();
 //   res.render('careers/list', { careers: data });
 // });
-router.get('/', async function (req, res, next) {
+router.get('/list', async function (req, res, next) {
   const data = await careerController.getAll();
   // res.render('careers/list', { careers: data });
-  res.json({ data: data });
+  res.json(data);
   console.log("Lấy data thành công");
 });
 
