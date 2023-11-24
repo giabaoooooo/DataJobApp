@@ -21,6 +21,9 @@ var worktypeRouter = require('./routes/worktypes');
 var statusRouter = require('./routes/status');
 var postRouter = require('./routes/post');
 var testimgRouter = require('./routes/testimg');
+var genderRouter = require('./routes/gender.js');
+var worksaveRouter = require('./routes/worksave');
+var applyRouter = require('./routes/apply');
 
 //connect to MongoDB
 var mongoose = require('mongoose');
@@ -60,6 +63,9 @@ app.use('/worktypes', worktypeRouter);
 app.use('/status', statusRouter);
 app.use('/posts', postRouter);
 app.use('/test', testimgRouter);
+app.use('/gender', genderRouter);
+app.use('/worksave', worksaveRouter);
+app.use('/apply', applyRouter);
 
 
 // catch 404 and forward to error handler
