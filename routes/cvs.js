@@ -5,8 +5,9 @@ var cvModules = require('../modules/cv');
 
 //lấy tất cả cv
 router.get('/list', async function (req, res, next) {
-    var data = await cvModules.find().populate('experience' ).populate('career').populate('acedemic').populate('work_type').populate('pay_form').populate('user');
+    var data = await cvModules.find().populate('experience_id').populate('career_id').populate('acedemic_id').populate('work_type').populate('pay_form').populate('user');
     res.json(data);
+    console.log(data);
 });
 
 

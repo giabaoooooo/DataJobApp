@@ -31,4 +31,4 @@ const cvSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model.cvs || mongoose.model('cv', cvSchema);
+module.exports = mongoose.model.cvs || mongoose.model('cvs', cvSchema);

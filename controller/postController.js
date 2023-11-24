@@ -1,5 +1,15 @@
 const postModel = require('../modules/post');
 
+exports.insert = async function insert(users_id, businessName, address, image, title, quantity, gender, career_id, workType_id, payForm_id, wageMin, wageMax, describe, ageMin, ageMax, academic_id, experience_id, status_id) {
+    try {
+        let post = new postModel({ users_id, businessName, address, image, title, quantity, gender, career_id, workType_id, payForm_id, wageMin, wageMax, describe, ageMin, ageMax, academic_id, experience_id, status_id });
+        await post.save();
+        console.log("Post success..");
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 exports.changeStatus = async (_id, status) => {
     try {
         await postModel.findByIdAndUpdate(_id, { status_id: status });
