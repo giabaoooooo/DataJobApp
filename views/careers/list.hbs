@@ -37,7 +37,7 @@
                                     <td>{{this.c_title}}</td>
                                     <td><img width="200" height="150" src="{{this.image}}" alt=""></td>
                                     <td>
-                                        <button type="button" class="btn btn-info">Edit</button>
+                                        <button type="button" class="btn btn-info" onclick="edit('{{this._id}}')">Edit</button>
                                         <button type="button" class="btn btn-danger" onclick="confirmDelete('{{this._id}}')">Delete</button>
                                     </td>
                                 </tr>
@@ -91,6 +91,10 @@
 
         const demo = (id) => {
             window.location.href = `/careers/delete/${id}` ;
+        }
+
+        const edit = (id) => {
+            window.location.href = `/careers/${id}` ;
         }
 
     </script>

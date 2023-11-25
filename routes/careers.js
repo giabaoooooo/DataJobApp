@@ -31,14 +31,18 @@ router.get('/new-career', async function (req, res, next) {
   res.render('careers/new');
 });
 
+
 //thêm mới career
-router.post('/add', upload.single('image'), async function (req, res, next) {
-  let { c_title, img } = req.body;
+router.post('/add', [upload.single('image'),], async function (req, res, next) {
+  let { c_title, image } = req.body;
+  console.log(req.body);
+
   try {
+    console.log(req.file);
     img = await cloudinary.uploader.upload(req.file.path);
     await careerController.add(c_title, img.secure_url);
     res.redirect('/careers');
-    console.log("Thêm mới thành công");
+    console.log(img);
   } catch (error) {
     console.error(error);
   }
@@ -53,30 +57,57 @@ router.delete('/delete/:id', async function (req, res, next) {
 
     if (result.deletedCount === 1) {
       console.log("Xóa thành công");
-      res.redirect('/');
+      // res.render('careers/list');
+      res.json({ status: true });
 
     } else {
       console.log("Xóa không thành công");
+      res.json({ status: false });
     }
   } catch (error) {
     console.error(error);
   }
 });
 
+router.get('/:id', async (req, res, next)=> { 
+  console.log("Trang sửa");
+  let _id = req.params.id;
+  try {
+    let career = await careerController.findbyId(_id);
+    res.render('careers/edit', { careers : career})
+  } catch (error) {
+    console.log(error);
+  }
+  
+});
+
 //update career
-// router.put('/:id', upload.single('image'), async function (req, res, next) {
-//   try {
-//     var id = req.query.id;
-//     const result = await cloudinary.uploader.upload(req.file.path);
-//     const data = await careerModel.findByIdAndUpdate(id, {
-//       c_title: req.body.c_title,
-//       image: result.secure_url,
-//     });
-//     res.json({ message: "Cập nhật thành công", data: data });
-//   } catch (error) {
-//     res.json({ message: "Cập nhật thất bại", data: error });
-//   }
-// });
+router.post('/edit/:id', upload.single('image'), async function (req, res, next) {
+  let id = req.params.id;
+  let career = await careerController.findbyId(id);
+  let Img = req.file;
+  let image;
+  let one;
+  if (Img == null) {
+    image = career.image;
+  } else {
+    one = await cloudinary.uploader.upload(req.file.path);
+    image = one.secure_url;
+  }
+  let c_title = req.body.c_title;
+
+  try {
+    // img = await cloudinary.uploader.upload(req.file.path);
+    await careerController.update(id, c_title, image);
+    res.redirect('/careers');
+    // console.log(img);
+  } catch (error) {
+    console.error(error);
+  }
+  // console.log(id);
+});
+
+
 
 
 module.exports = router;
