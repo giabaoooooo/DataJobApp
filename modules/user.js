@@ -5,10 +5,11 @@ const user = new Schema({
     _id: ObjectId,
     username: String,
     password: String,
-    name: String,
+    displayName: String,
     birthday: String,
     andress: String,
     email: String,
     gender: String,
+    phone:Number,
 });
 module.exports = mongoose.model.users || mongoose.model('user', user);

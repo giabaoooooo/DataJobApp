@@ -20,7 +20,7 @@ var worktypeRouter = require('./routes/worktypes');
 var statusRouter = require('./routes/status');
 var postRouter = require('./routes/post');
 var testimgRouter = require('./routes/testimg');
-
+var adminRouter = require('./routes/admins');
 //connect to MongoDB
 var mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://sakuraimusic123:Datn2023@linksdaily.pfhz3ry.mongodb.net/jobapp', {
@@ -42,11 +42,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static("styles"));
 
-app.use('/', indexRouter);
+app.use('/index', indexRouter);
 app.use('/users', usersRouter);
 app.use('/career', career);
-
-
+app.use('/admin',adminRouter);
 app.use('/acedemics', aceRouter);
 app.use('/careers', careerRouter);
 app.use('/cvs', cvRouter);
@@ -56,6 +55,8 @@ app.use('/worktypes', worktypeRouter);
 app.use('/status', statusRouter);
 app.use('/posts', postRouter);
 app.use('/test', testimgRouter);
+app.use(express.static("dist"))
+app.use(express.static("plugins"))
 
 
 // catch 404 and forward to error handler
@@ -73,5 +74,6 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;

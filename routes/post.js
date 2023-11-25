@@ -33,6 +33,7 @@ router.get('/post-waiting', async function (req, res, next) {
     try {
         const data = await postModel.find({ status_id: "65423efa3f8e779b5ec14e51" });//đang chờ duyệt
         res.render('dashboard/post_waiting', { posts: data });
+        console.log(data);
         return data;
     } catch (error) {
         console.error(error);

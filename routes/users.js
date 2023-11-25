@@ -2,11 +2,13 @@ const jwt = require('jsonwebtoken');
 var express = require('express');
 var router = express.Router();
 const user = require('../modules/user');
+const userController = require('../controller/userController')
 
-//get layout login
-router.get('/', function(req, res, next) {
-  res.render('login', { title: 'Login Admin' });
-});
+
+// get layout login
+// router.get('/', function(req, res, next) {
+//   res.render('login', { title: 'Login Admin' });
+// });
 /* GET users listing. */
 router.get('/list', async function (req, res, next) {
   const users = await user.find();
@@ -42,7 +44,7 @@ router.get('/list', async function (req, res, next) {
 // }); 
 
 
-//Nếu nhập đúng username và password sẽ thông báo và trả về username và password
+// Nếu nhập đúng username và password sẽ thông báo và trả về username và password
 router.post('/login', async function (req, res, next) {
   const users = await user.find();
   const username = req.body.username;
@@ -59,6 +61,37 @@ router.post('/login', async function (req, res, next) {
       message: 'Đăng nhập thất bại',
       success: false
     });
+  }
+});
+router.get('/', async (req, res, next) => {
+
+  try {
+      let users = await userController.getAll();
+      users = users.map((el, index) => {
+          return {
+              _id: el._id,
+              
+              email: el.email,
+              displayName: el.displayName,
+              phone:el.phone,
+              index: index + 1,
+          }
+      });
+      res.render('userList', { us: users });
+      console.log(users);
+  } catch (error) {
+      console.log("Error in getAll():", error);
+  }
+});
+router.post('/check', async (req, res, next) => {
+  try {
+      let { id } = req.body;
+      let users = await userController.check(id);
+
+      res.send(users);
+      console.log(users);
+  } catch (error) {
+      console.log("Error in getAll():", error);
   }
 });
 
