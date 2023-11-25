@@ -9,13 +9,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 const PostController = require('../controller/PostController');
 
-//upload array images
-
-//lấy danh sách
-// router.get('/list', async function (req, res, next) {
-//     const data = await postModel.find().populate('users_id').populate('career_id').populate('payform_id').populate('experience_id').populate('acedemic_id').populate('worktype_id').populate('status_id');
-//     res.json(data)
-// });
 //lấy danh sách theo id
 router.get('/list-by-id', async function (req, res, next) {
     var id = req.query.id;
@@ -34,8 +27,8 @@ router.get('/list-by-user', async function (req, res, next) {
 router.get('/post-waiting', async function (req, res, next) {
     try {
         const data = await postModel.find({ status_id: "65423efa3f8e779b5ec14e51" });//đang chờ duyệt
-        // res.render('dashboard/post_waiting', { posts: data });
-        res.json({ message: "Lấy danh sách thành công", data: data });
+        res.render('dashboard/post_waiting', { posts: data });
+        // res.json({ message: "Lấy danh sách thành công", data: data });
         console.log(data);
         return data;
     } catch (error) {
@@ -45,8 +38,8 @@ router.get('/post-waiting', async function (req, res, next) {
 router.get('/post-denied', async function (req, res, next) {
     try {
         const data = await postModel.find({ status_id: "65447e3996c02dcf49965472" });//Từ chối duyệt
-        // res.render('dashboard/post_denied', { posts: data });
-        res.json({ message: "Lấy danh sách thành công", data: data });
+        res.render('dashboard/post_denied', { posts: data });
+        // res.json({ message: "Lấy danh sách thành công", data: data });
         return data;
     } catch (error) {
         console.error(error);
@@ -55,8 +48,8 @@ router.get('/post-denied', async function (req, res, next) {
 router.get('/post-allow', async function (req, res, next) {
     try {
         const data = await postModel.find({ status_id: "65447e2296c02dcf49965471" });//đã duyệt
-        // res.render('dashboard/post_allow', { posts: data });
-        res.json({ message: "Lấy danh sách thành công", data: data });
+        res.render('dashboard/post_allow', { posts: data });
+        // res.json({ message: "Lấy danh sách thành công", data: data });
         return data;
     } catch (error) {
         console.error(error);
@@ -99,14 +92,13 @@ router.get('/list', async function (req, res, next) {
 
 //Lấy danh sách bài đăng đã lưu của user
 router.post('/listSaveJobsForApp', async function (req, res, next) {
-    res.json(data)
+    //res.json(data)
 });
 
 //Tìm kiếm bằng từ khóa
 router.post('/searchByKeyForApp', async function (req, res) {
     const data = await PostController.searchByKey(req.body.key);
     res.json(data)
-    console.log(data);
 });
 
 //Lấy danh sách bài đăng của user đang hiện thị

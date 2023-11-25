@@ -1,0 +1,64 @@
+Experience: {
+    id: "653e64098e88b23b41388e37";//ko yêu cầu
+
+    id: "653e64198e88b23b41388e38";//dưới 1 năm
+
+    id: "655dea819a5b0ffa7ffd513c";//1 - 2 năm
+
+    id: "655dea939a5b0ffa7ffd513d";//2 - 3 năm
+
+    id: "655deab09a5b0ffa7ffd513e";//3 - 4 năm
+
+    id: "655deac79a5b0ffa7ffd513f";//trên 4 năm
+}
+career: {
+    id: "6554b9b322054e51b8327165";//tạp vụ
+    
+    id: "6554b9ce22054e51b8327168";//nhân viên kho vận
+    
+    id: "6554b9de22054e51b832716b";//công nhân may
+    
+    id: "6554b9f522054e51b832716e";//bảo vệ
+    
+    id: "6554ba1922054e51b8327171";//pha chế
+    
+    id: "6558505e70f5b03183a9c903";//bán hàng
+    
+    id: "6558620586d0490539c8353c";//nhân viên phục vụ
+
+    id: "65586aa480b16af7fdeef6f3";//nhân viên
+}
+acedemic: {
+    id: "653e661f8e88b23b41388e3b";//trung cấp nghề
+    
+    id: "655de6059a5b0ffa7ffd5134";//cấp 3
+    
+    id: "655de6289a5b0ffa7ffd5135";//ko yêu cầu
+    
+    id: "655de6fc9a5b0ffa7ffd5136";//đại học
+
+    id: "655de7129a5b0ffa7ffd5137";//cao đẳng
+}
+payform: {
+    id: "653e66f58e88b23b41388e3d";//tất cả
+    
+    id: "655de22b9a5b0ffa7ffd5132";//theo giờ
+    
+    id: "155de22b9a5b0ffa7ffd5132";//theo ngày
+    
+    id: "355de22b9a5b0ffa7ffd5132";//theo tháng
+
+    id: "955de22b9a5b0ffa7ffd5132";//theo lương khoán
+}
+worktype: {
+    id: "653e66b38e88b23b41388e3c";//bán thời gian
+
+    id: "6558634415be344ac80a3b40";//toàn thời gian
+}
+status: {
+    id: "65423efa3f8e779b5ec14e51";//đang chờ
+    
+    id: "65447e2296c02dcf49965471";//đã duyệt
+
+    id: "65447e3996c02dcf49965472";//ko đc duyệt
+}

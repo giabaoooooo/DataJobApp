@@ -2,31 +2,32 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 const cvSchema = new Schema({
-    _id: ObjectId,
+    // _id: ObjectId,
     current_andress: String,
-    experience:{
-        type: ObjectId,
+    title: String,
+    experience_id:{
+        type: String,
         ref: 'experience',
     },
-    career: {
+    career_id: {
         type: ObjectId,
         ref: 'career',
     },
-    acedemic: {
-        type: ObjectId,
+    acedemic_id: {
+        type: String,
         ref: 'acedemic',
     },
-    work_type: {
-        type: ObjectId,
+    worktype_id: {
+        type: String,
         ref: 'worktype',
     },
-    pay_form: {
-        type: ObjectId,
+    payform_id: {
+        type: String,
         ref: 'payform',
     },
-    instroduce: String,
-    user: {
-        type: ObjectId,
+    describe: String,
+    user_id: {
+        type: String,
         ref: 'user',
     }
 });
