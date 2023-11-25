@@ -56,10 +56,6 @@ exports.delete = async (id,res,req) => {
 
 //edit career
 exports.findbyId = async (_id) => {
-<<<<<<< HEAD
-=======
-    
->>>>>>> c6af8beec4b8b6167fcbfa16140293752af80759
     try {
         let careers = await careerModel.findOne({  _id });
         return careers;

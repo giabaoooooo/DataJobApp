@@ -10,6 +10,7 @@ dotev.config();
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/UsersRouter');
 var career = require('./routes/screen/career');
+var users = require('./routes/users.js');
 
 
 var aceRouter = require('./routes/acedemics');
@@ -21,14 +22,11 @@ var worktypeRouter = require('./routes/worktypes');
 var statusRouter = require('./routes/status');
 var postRouter = require('./routes/post');
 var testimgRouter = require('./routes/testimg');
-<<<<<<< HEAD
 var genderRouter = require('./routes/gender.js');
 var worksaveRouter = require('./routes/worksave');
 var applyRouter = require('./routes/apply');
-
-=======
 var adminRouter = require('./routes/admins');
->>>>>>> c6af8beec4b8b6167fcbfa16140293752af80759
+
 //connect to MongoDB
 var mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://sakuraimusic123:Datn2023@linksdaily.pfhz3ry.mongodb.net/jobapp', {
@@ -54,8 +52,9 @@ app.use(express.json());
 app.use(express.static("styles"));
 
 app.use('/index', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 app.use('/career', career);
+app.use('/users', users);
 app.use('/admin',adminRouter);
 app.use('/acedemics', aceRouter);
 app.use('/careers', careerRouter);
@@ -66,14 +65,8 @@ app.use('/worktypes', worktypeRouter);
 app.use('/status', statusRouter);
 app.use('/posts', postRouter);
 app.use('/test', testimgRouter);
-<<<<<<< HEAD
-app.use('/gender', genderRouter);
-app.use('/worksave', worksaveRouter);
-app.use('/apply', applyRouter);
-=======
 app.use(express.static("dist"))
 app.use(express.static("plugins"))
->>>>>>> c6af8beec4b8b6167fcbfa16140293752af80759
 
 
 // catch 404 and forward to error handler

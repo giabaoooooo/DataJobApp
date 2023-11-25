@@ -40,10 +40,10 @@ router.post('/upload-image', upload.array('images', 5), async function (req, res
 //   const data = await careerModel.find();
 //   res.render('careers/list', { careers: data });
 // });
-router.get('/list', async function (req, res, next) {
+router.get('/', async function (req, res, next) {
   const data = await careerController.getAll();
-  // res.render('careers/list', { careers: data });
-  res.json(data);
+  res.render('careers/list', { careers: data });
+  // res.json(data);
   console.log("Lấy data thành công");
 });
 
@@ -97,7 +97,6 @@ router.delete('/delete/:id', async function (req, res, next) {
   //   console.error(error);
   // }
   try {
-<<<<<<< HEAD
     const result = await careerModel.deleteOne({ _id: id });
 
     if (result.deletedCount === 1) {
@@ -109,11 +108,6 @@ router.delete('/delete/:id', async function (req, res, next) {
       console.log("Xóa không thành công");
       res.json({ status: false });
     }
-=======
-    
-    await  await careerModel.deleteOne({ _id: id });
-    res.json({ status: true });
->>>>>>> c6af8beec4b8b6167fcbfa16140293752af80759
   } catch (error) {
     console.error(error);
     res.json({ status: false });
@@ -121,13 +115,8 @@ router.delete('/delete/:id', async function (req, res, next) {
 
 });
 
-<<<<<<< HEAD
 router.get('/:id', async (req, res, next) => {
   console.log("Trang sửa");
-=======
-router.get('/:id', async (req, res, next)=> { 
- 
->>>>>>> c6af8beec4b8b6167fcbfa16140293752af80759
   let _id = req.params.id;
   try {
     let career = await careerController.findbyId(_id);
@@ -141,7 +130,6 @@ router.get('/:id', async (req, res, next)=> {
 
 //update career
 router.post('/edit/:id', upload.single('image'), async function (req, res, next) {
-<<<<<<< HEAD
   let id = req.params.id;
   let career = await careerController.findbyId(id);
   let Img = req.file;
@@ -165,21 +153,6 @@ router.post('/edit/:id', upload.single('image'), async function (req, res, next)
     console.error(error);
   }
   // console.log(id);
-=======
-  console.log("Trang sửa");
-  let id = req.params.id;
-  console.log(id);
-  let { c_title, img } = req.body;
-  try {
-    img = await cloudinary.uploader.upload(req.file.path);
-    await careerController.update(id, c_title, img.secure_url);
-    res.redirect('/careers');
-    console.log(img);
-  } catch (error) {
-    console.error(error);
-  }
-  
->>>>>>> c6af8beec4b8b6167fcbfa16140293752af80759
 });
 
 
