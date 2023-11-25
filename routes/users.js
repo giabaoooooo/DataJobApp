@@ -2,13 +2,18 @@ const jwt = require('jsonwebtoken');
 var express = require('express');
 var router = express.Router();
 const user = require('../modules/user');
+<<<<<<< HEAD
 const cv = require('../modules/cv');
 const userController = require('../controller/usersController');
+=======
+const userController = require('../controller/userController')
+>>>>>>> c6af8beec4b8b6167fcbfa16140293752af80759
 
-//get layout login
-router.get('/', function(req, res, next) {
-  res.render('login', { title: 'Login Admin' });
-});
+
+// get layout login
+// router.get('/', function(req, res, next) {
+//   res.render('login', { title: 'Login Admin' });
+// });
 /* GET users listing. */
 router.get('/list', async function (req, res, next) {
   const users = await user.find();
@@ -61,10 +66,16 @@ router.post('/login', async function (req, res, next) {
 //   }
 // });
 
+<<<<<<< HEAD
 //đăng ký users và trả về token
 router.post('/register', async function (req, res, next) {
   const {username, password, name, birthday, andress, email, gender,phone} = req.body;
   // const password = req.body.password;
+=======
+
+// Nếu nhập đúng username và password sẽ thông báo và trả về username và password
+router.post('/login', async function (req, res, next) {
+>>>>>>> c6af8beec4b8b6167fcbfa16140293752af80759
   const users = await user.find();
   const userRegister = users.find(user => user.phone === phone);
   if (userRegister) {
@@ -91,6 +102,37 @@ router.post('/register', async function (req, res, next) {
       token: token,
       userInfor: newUser
     });
+  }
+});
+router.get('/', async (req, res, next) => {
+
+  try {
+      let users = await userController.getAll();
+      users = users.map((el, index) => {
+          return {
+              _id: el._id,
+              
+              email: el.email,
+              displayName: el.displayName,
+              phone:el.phone,
+              index: index + 1,
+          }
+      });
+      res.render('userList', { us: users });
+      console.log(users);
+  } catch (error) {
+      console.log("Error in getAll():", error);
+  }
+});
+router.post('/check', async (req, res, next) => {
+  try {
+      let { id } = req.body;
+      let users = await userController.check(id);
+
+      res.send(users);
+      console.log(users);
+  } catch (error) {
+      console.log("Error in getAll():", error);
   }
 });
 

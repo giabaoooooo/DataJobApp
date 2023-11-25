@@ -13,7 +13,9 @@
 
     
 
-        <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <section>
+
+
             <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
             <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
             <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
@@ -35,6 +37,7 @@
             <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
             <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
             <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+<span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
             <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
             <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
             <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
@@ -42,8 +45,11 @@
             <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
             <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
             <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
-
+           
+            
+            
             <div class="signin">
+                <form action="/admin/login" method="post">
 
                 <div class="content">
 
@@ -53,13 +59,13 @@
 
                         <div class="inputBox">
 
-                            <input type="text" required> <i>Username</i>
+                            <input type="text" name="username"> <i>Username</i>
 
                         </div>
 
                         <div class="inputBox">
 
-                            <input type="password" required> <i>Password</i>
+                            <input type="password" name="password"> <i>Password</i>
 
                         </div>
 
@@ -73,15 +79,17 @@
 
                         </div>
 
+                          
                     </div>
 
                 </div>
-
+</form>
             </div>
+            
 
         </section> <!-- partial -->
 
-
+    
     
 </body>
 
