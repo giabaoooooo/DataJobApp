@@ -1,9 +1,26 @@
 const cloudinary = require('cloudinary').v2;
 
-cloudinary.config({ 
-    cloud_name: "deawv1daj",
-    api_key: "939447466939568",
-    api_secret: "6kouaWzm5Z4Lz0vtGBtVz-IAR-0",
+const dotenv = require('dotenv');
+dotenv.config();
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
 })
+
+exports.uploads = (file, folder) => {
+    return new Promise(resolve => {
+        cloudinary.uploader.upload(file, (result) => {
+            resolve({
+                url: result.url,
+                id: result.public_id
+            })
+        }, {
+            resource_type: "auto",
+            folder: folder
+        })
+    })
+}
 
 module.exports = cloudinary;

@@ -9,8 +9,6 @@ dotev.config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/UsersRouter');
-var career = require('./routes/screen/career');
-
 
 var aceRouter = require('./routes/acedemics');
 var careerRouter = require('./routes/careers');
@@ -21,6 +19,10 @@ var worktypeRouter = require('./routes/worktypes');
 var statusRouter = require('./routes/status');
 var postRouter = require('./routes/post');
 var testimgRouter = require('./routes/testimg');
+var genderRouter = require('./routes/gender.js');
+var worksaveRouter = require('./routes/worksave');
+var applyRouter = require('./routes/apply');
+var notificationRouter = require('./routes/notifications');
 
 //connect to MongoDB
 var mongoose = require('mongoose');
@@ -48,8 +50,6 @@ app.use(express.static("styles"));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/career', career);
-
 
 app.use('/acedemics', aceRouter);
 app.use('/careers', careerRouter);
@@ -60,7 +60,10 @@ app.use('/worktypes', worktypeRouter);
 app.use('/status', statusRouter);
 app.use('/posts', postRouter);
 app.use('/test', testimgRouter);
-
+app.use('/gender', genderRouter);
+app.use('/worksave', worksaveRouter);
+app.use('/apply', applyRouter);
+app.use('/notifications', notificationRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
