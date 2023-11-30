@@ -107,17 +107,6 @@ router.delete('/delete/:id', async function (req, res, next) {
 
 });
 
-router.get('/:id', async (req, res, next)=> { 
- 
-  let _id = req.params.id;
-  try {
-    let career = await careerController.findbyId(_id);
-    res.render('careers/edit', { careers : career})
-  } catch (error) {
-    console.log(error);
-  }
-  
-});
 
 //update career
 router.post('/edit/:id', upload.single('image'), async function (req, res, next) {
