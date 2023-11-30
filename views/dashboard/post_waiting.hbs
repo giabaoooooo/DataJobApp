@@ -303,7 +303,7 @@
                                                     {{/each}}
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-info ">Chấp nhận</button>
+                                                    <button type="button" class="btn btn-success" onclick="AllowPost('{{this.id}}')">Duyệt Bài</button>
                                                     <button type="button" class="btn btn-danger "
                                                         onclick="confirmDelete('{{this._id}}')">Từ chối</button>
                                                    
@@ -451,7 +451,7 @@
         }
 
         const AllowPost = (id) => {
-            window.location.href = `/update-status?id=${id}`;
+            window.location.href = `/${id}/change-status`;
         }
         
     </script>

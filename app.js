@@ -68,6 +68,8 @@ app.use('/test', testimgRouter);
 app.use('/gender', genderRouter);
 app.use('/savePost', savePostRouter);
 app.use('/apply', applyRouter);
+app.use(express.static("dist"))
+app.use(express.static("plugins"))
 // app.use('/notifications', notificationRouter);
 
 // catch 404 and forward to error handler
