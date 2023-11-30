@@ -9,6 +9,9 @@ dotev.config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/UsersRouter');
+var career = require('./routes/screen/career');
+var users = require('./routes/users.js');
+
 
 var aceRouter = require('./routes/acedemics');
 var careerRouter = require('./routes/careers');
@@ -22,7 +25,7 @@ var testimgRouter = require('./routes/testimg');
 var genderRouter = require('./routes/gender.js');
 var savePostRouter = require('./routes/savePost');
 var applyRouter = require('./routes/apply');
-var notificationRouter = require('./routes/notifications');
+var adminRouter = require('./routes/admins');
 
 //connect to MongoDB
 var mongoose = require('mongoose');
@@ -48,9 +51,11 @@ app.use(express.json());
 
 app.use(express.static("styles"));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
+app.use('/index', indexRouter);
+app.use('/user', usersRouter);
+app.use('/career', career);
+app.use('/users', users);
+app.use('/admin',adminRouter);
 app.use('/acedemics', aceRouter);
 app.use('/careers', careerRouter);
 app.use('/cvs', cvRouter);
@@ -58,12 +63,14 @@ app.use('/experiences', experienceRouter);
 app.use('/payforms', payformRouter);
 app.use('/worktypes', worktypeRouter);
 app.use('/status', statusRouter);
-app.use('/posts', postRouter);
+app.use('/', postRouter);
 app.use('/test', testimgRouter);
 app.use('/gender', genderRouter);
 app.use('/savePost', savePostRouter);
 app.use('/apply', applyRouter);
-app.use('/notifications', notificationRouter);
+app.use(express.static("dist"))
+app.use(express.static("plugins"))
+// app.use('/notifications', notificationRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -80,5 +87,6 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;
