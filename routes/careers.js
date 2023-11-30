@@ -40,10 +40,10 @@ router.post('/upload-image', upload.array('images', 5), async function (req, res
 //   const data = await careerModel.find();
 //   res.render('careers/list', { careers: data });
 // });
-router.get('/list', async function (req, res, next) {
+router.get('/', async function (req, res, next) {
   const data = await careerController.getAll();
-  // res.render('careers/list', { careers: data });
-  res.json(data);
+  res.render('careers/list', { careers: data });
+  // res.json(data);
   console.log("Lấy data thành công");
 });
 
@@ -83,6 +83,19 @@ router.post('/add', [upload.single('image'),], async function (req, res, next) {
 //delete
 router.delete('/delete/:id', async function (req, res, next) {
   let id = req.params.id;
+  // try {
+  //   const result = await careerModel.deleteOne({ _id: id });
+
+  //   if (result.deletedCount === 1) {
+  //     console.log("Xóa thành công");
+  //     res.render('careers/list');
+
+  //   } else {
+  //     console.log("Xóa không thành công");
+  //   }
+  // } catch (error) {
+  //   console.error(error);
+  // }
   try {
     const result = await careerModel.deleteOne({ _id: id });
 
@@ -97,7 +110,9 @@ router.delete('/delete/:id', async function (req, res, next) {
     }
   } catch (error) {
     console.error(error);
+    res.json({ status: false });
   }
+
 });
 
 // router.get('/:id', async (req, res, next) => {
