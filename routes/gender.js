@@ -4,7 +4,7 @@ const genderModel = require('../modules/gender')
 
 
 //get list
-router.get('/', (req, res) => {
+router.get('/list', (req, res) => {
     genderModel.find()
         .then(data => {
             res.json(data)

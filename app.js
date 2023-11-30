@@ -20,7 +20,7 @@ var statusRouter = require('./routes/status');
 var postRouter = require('./routes/post');
 var testimgRouter = require('./routes/testimg');
 var genderRouter = require('./routes/gender.js');
-var worksaveRouter = require('./routes/worksave');
+var savePostRouter = require('./routes/savePost');
 var applyRouter = require('./routes/apply');
 var notificationRouter = require('./routes/notifications');
 
@@ -61,7 +61,7 @@ app.use('/status', statusRouter);
 app.use('/posts', postRouter);
 app.use('/test', testimgRouter);
 app.use('/gender', genderRouter);
-app.use('/worksave', worksaveRouter);
+app.use('/savePost', savePostRouter);
 app.use('/apply', applyRouter);
 app.use('/notifications', notificationRouter);
 

@@ -9,7 +9,6 @@ const notificationController = require('../controller/notificationController');
 router.post('/list', async function (req, res, next) {
     var data = await notificationController.getById(req.body.receiver_id);
     res.json(data);
-    console.log(data);
 });
 
 module.exports = router;
