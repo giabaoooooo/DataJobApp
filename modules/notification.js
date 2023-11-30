@@ -25,6 +25,7 @@ const notificationSchema = new Schema({
     typeNotification: {
         type: String,
     },
+    isRead: Boolean,
     date: { type: Date, default: Date.now() },
     time: { type: String, default: currentTime.getHours() + ":" + currentTime.getMinutes() + ":" + currentTime.getSeconds() },
 })

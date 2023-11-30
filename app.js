@@ -23,7 +23,7 @@ var statusRouter = require('./routes/status');
 var postRouter = require('./routes/post');
 var testimgRouter = require('./routes/testimg');
 var genderRouter = require('./routes/gender.js');
-var worksaveRouter = require('./routes/worksave');
+var savePostRouter = require('./routes/savePost');
 var applyRouter = require('./routes/apply');
 var adminRouter = require('./routes/admins');
 
@@ -65,9 +65,10 @@ app.use('/worktypes', worktypeRouter);
 app.use('/status', statusRouter);
 app.use('/', postRouter);
 app.use('/test', testimgRouter);
-app.use(express.static("dist"))
-app.use(express.static("plugins"))
-
+app.use('/gender', genderRouter);
+app.use('/savePost', savePostRouter);
+app.use('/apply', applyRouter);
+// app.use('/notifications', notificationRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

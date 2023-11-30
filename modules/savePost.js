@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
-const workSaveSchema = new Schema({
-    _id: ObjectId,
+const savePostSchema = new Schema({
+    //_id: ObjectId,
     user_id: {
         type: String,
         ref: 'user',
@@ -13,4 +13,4 @@ const workSaveSchema = new Schema({
     },
 });
 
-module.exports = mongoose.model.worksave || mongoose.model('worksave', workSaveSchema);
+module.exports = mongoose.model.savePost || mongoose.model('savePost', savePostSchema);

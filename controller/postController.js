@@ -28,27 +28,27 @@ exports.getById = async (_id) => {
     }
 }
 
-exports.getByIsDisplayStatus = async () => {
+exports.getByIsDisplayStatus = async (id) => {
     try {
-        let posts = await postModel.find({ status_id: "65447e2296c02dcf49965471" });
+        let posts = await postModel.find({ status_id: "65447e2296c02dcf49965471", users_id : id});
         return posts;
     } catch (error) {
         console.log(error);
     }
 }
 
-exports.getByWaitingStatus = async () => {
+exports.getByWaitingStatus = async (id) => {
     try {
-        let posts = await postModel.find({ status_id: "65423efa3f8e779b5ec14e51" });
+        let posts = await postModel.find({ status_id: "65423efa3f8e779b5ec14e51", users_id: id });
         return posts;
     } catch (error) {
         console.log(error);
     }
 }
 
-exports.getByDeniedStatus = async () => {
+exports.getByDeniedStatus = async (id) => {
     try {
-        let posts = await postModel.find({ status_id: "65447e3996c02dcf49965472" });
+        let posts = await postModel.find({ status_id: "65447e3996c02dcf49965472", users_id: id });
         return posts;
     } catch (error) {
         console.log(error);

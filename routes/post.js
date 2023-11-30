@@ -28,8 +28,6 @@ router.get('/post-waiting', async function (req, res, next) {
     try {
         const data = await postModel.find({ status_id: "65423efa3f8e779b5ec14e51" });//đang chờ duyệt
         res.render('dashboard/post_waiting', { posts: data });
-        // res.json({ message: "Lấy danh sách thành công", data: data });
-        console.log(data);
         return data;
     } catch (error) {
         console.error(error);
@@ -39,7 +37,6 @@ router.get('/post-denied', async function (req, res, next) {
     try {
         const data = await postModel.find({ status_id: "65447e3996c02dcf49965472" });//Từ chối duyệt
         res.render('dashboard/post_denied', { posts: data });
-        // res.json({ message: "Lấy danh sách thành công", data: data });
         return data;
     } catch (error) {
         console.error(error);
@@ -49,7 +46,6 @@ router.get('/post-allow', async function (req, res, next) {
     try {
         const data = await postModel.find({ status_id: "65447e2296c02dcf49965471" });//đã duyệt
         res.render('dashboard/post_allow', { posts: data });
-        // res.json({ message: "Lấy danh sách thành công", data: data });
         return data;
     } catch (error) {
         console.error(error);
@@ -102,18 +98,21 @@ router.post('/searchByKeyForApp', async function (req, res) {
 });
 
 //Lấy danh sách bài đăng của user đang hiện thị
-router.get('/listJobsIsDisplayForApp', async function (req, res, next) {
-    const data = await PostController.getByIsDisplayStatus();
+router.post('/listJobsIsDisplayForApp', async function (req, res, next) {
+    const data = await PostController.getByIsDisplayStatus(req.body.id);
+    data.reverse();
     res.json(data)
 });
 //Lấy danh sách bài đăng của user đang chờ duyệt
-router.get('/listJobsWaitingForApp', async function (req, res, next) {
-    const data = await PostController.getByWaitingStatus();
+router.post('/listJobsWaitingForApp', async function (req, res, next) {
+    const data = await PostController.getByWaitingStatus(req.body.id);
+    data.reverse();
     res.json(data)
 });
 //Lấy danh sách bài đăng của user bị từ chối
-router.get('/listJobsDeniedForApp', async function (req, res, next) {
-    const data = await PostController.getByDeniedStatus();
+router.post('/listJobsDeniedForApp', async function (req, res, next) {
+    const data = await PostController.getByDeniedStatus(req.body.id);
+    data.reverse();
     res.json(data)
 });
 
