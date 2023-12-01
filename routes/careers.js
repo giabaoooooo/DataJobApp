@@ -57,9 +57,9 @@ router.get('/detail', async function (req, res, next) {
 });
 
 // //render new career
-// router.get('/new-career', async function (req, res, next) {
-//   res.render('careers/new');
-// });
+router.get('/new-career', async function (req, res, next) {
+  res.render('careers/new');
+});
 
 
 //thêm mới career
