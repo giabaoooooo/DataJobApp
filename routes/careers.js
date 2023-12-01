@@ -71,7 +71,7 @@ router.post('/add', [upload.single('image'),], async function (req, res, next) {
     console.log(req.file);
     img = await cloudinary.uploader.upload(req.file.path);
     await careerController.add(c_title, img.secure_url);
-    // res.redirect('/careers');
+    res.redirect('/careers');
     res.json({ status: true });
     console.log(img);
   } catch (error) {
@@ -97,8 +97,8 @@ router.delete('/delete/:id', async function (req, res, next) {
   //   console.error(error);
   // }
   try {
-    
-    await  await careerModel.deleteOne({ _id: id });
+
+    await await careerModel.deleteOne({ _id: id });
     res.json({ status: true });
   } catch (error) {
     console.error(error);
@@ -108,22 +108,56 @@ router.delete('/delete/:id', async function (req, res, next) {
 });
 
 
+router.get('/:id', async function(req, res, next) {
+  // get product detail
+  const {id} = req.params;
+  const result = await careerController.findbyId(id);
+  res.render('careers/edit', {careers:result});
+});
+
+// //update career
+// router.post('/edit/:id', upload.single('image'), async function (req, res, next) {
+//   console.log("Trang sửa");
+//   let id = req.params.id;
+//   console.log(id);
+//   let { c_title, img } = req.body;
+//   try {
+//     img = await cloudinary.uploader.upload(req.file.path);
+//     await careerController.update(id, c_title, img.secure_url);
+//     res.redirect('/careers');
+//     console.log(img);
+//   } catch (error) {
+//     console.error(error);
+//   }
+
+// });
+
 //update career
 router.post('/edit/:id', upload.single('image'), async function (req, res, next) {
-  console.log("Trang sửa");
   let id = req.params.id;
-  console.log(id);
-  let { c_title, img } = req.body;
+  let career = await careerController.findbyId(id);
+  let Img = req.file;
+  let image;
+  let one;
+  if (Img == null) {
+    image = career.image;
+  } else {
+    one = await cloudinary.uploader.upload(req.file.path);
+    image = one.secure_url;
+  }
+  let c_title = req.body.c_title;
   try {
-    img = await cloudinary.uploader.upload(req.file.path);
-    await careerController.update(id, c_title, img.secure_url);
+    // img = await cloudinary.uploader.upload(req.file.path);
+    await careerController.update(id, c_title, image);
     res.redirect('/careers');
-    console.log(img);
+    res.json({ status: true });
+    // console.log(img);
   } catch (error) {
     console.error(error);
   }
-  
+  // console.log(id);
 });
+
 
 
 //---------------------- APP ----------------------------------
