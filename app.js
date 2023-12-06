@@ -10,9 +10,12 @@ dotev.config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/UsersRouter');
+<<<<<<< HEAD
 var career = require('./routes/screen/career');
 var users = require('./routes/users.js');
 
+=======
+>>>>>>> b3e28f01d1086a12e6cd62a5c123742258cab18a
 
 var aceRouter = require('./routes/acedemics');
 var careerRouter = require('./routes/careers');
@@ -24,9 +27,13 @@ var statusRouter = require('./routes/status');
 var postRouter = require('./routes/post');
 var testimgRouter = require('./routes/testimg');
 var genderRouter = require('./routes/gender.js');
-var worksaveRouter = require('./routes/worksave');
+var savePostRouter = require('./routes/savePost');
 var applyRouter = require('./routes/apply');
+<<<<<<< HEAD
 var adminRouter = require('./routes/admins');
+=======
+var notificationRouter = require('./routes/notifications');
+>>>>>>> b3e28f01d1086a12e6cd62a5c123742258cab18a
 
 //connect to MongoDB
 var mongoose = require('mongoose');
@@ -52,11 +59,17 @@ app.use(express.json());
 
 app.use(express.static("styles"));
 
+<<<<<<< HEAD
 app.use('/index', indexRouter);
 app.use('/user', usersRouter);
 app.use('/career', career);
 app.use('/users', users);
 app.use('/admin',adminRouter);
+=======
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
+>>>>>>> b3e28f01d1086a12e6cd62a5c123742258cab18a
 app.use('/acedemics', aceRouter);
 app.use('/careers', careerRouter);
 app.use('/cvs', cvRouter);
@@ -66,11 +79,18 @@ app.use('/worktypes', worktypeRouter);
 app.use('/status', statusRouter);
 app.use('/', postRouter);
 app.use('/test', testimgRouter);
+<<<<<<< HEAD
 app.use('/work-save', worksaveRouter);
 app.use('/apply', applyRouter)
 app.use(express.static("dist"))
 app.use(express.static("plugins"))
 
+=======
+app.use('/gender', genderRouter);
+app.use('/savePost', savePostRouter);
+app.use('/apply', applyRouter);
+app.use('/notifications', notificationRouter);
+>>>>>>> b3e28f01d1086a12e6cd62a5c123742258cab18a
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

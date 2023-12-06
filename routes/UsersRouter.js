@@ -19,13 +19,13 @@ router.post('/GoogleSignIn', async function (req, res) {
   var token = req.body.idtoken;
   const user = await UserController.checkGoogleID(token);
   res.send(user);
-});  
+});
 
 // Đăng nhập bằng Phone Number
 router.post('/PhoneNumberSignIn', async function (req, res) {
-  var phoneNumber = req.body.phoneNumber;
-  const user = await UserController.checkPhoneNumber(phoneNumber);
+  var { displayName, birthDay, address, phone, gender, } = req.body.data;
+  const user = await UserController.checkPhoneNumber(displayName, birthDay, address, phone, gender,);
   res.send(user);
-});  
+});
 
 module.exports = router;

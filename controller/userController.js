@@ -42,22 +42,24 @@ async function checkGoogleID(token) {
 };
 
 // SignIn with Phone Number
-async function checkPhoneNumber(phoneNumber) {
+async function checkPhoneNumber(displayName, birthDay, address, phone, gender,) {
     try {
-        const existingUser = await User.findOne({ phone : phoneNumber });
+        console.log(phone, displayName);
+        const existingUser = await User.findOne({ phone: phone });
 
         if (existingUser) {
+            console.log(existingUser);
             return existingUser;
         } else {
             const data = new User({
                 googleId: "null",
-                displayName: "No Name",
+                displayName: displayName,
                 email: "null",
                 photo: "https://th.bing.com/th/id/R.0e2d903d47176e8d432d64aed96ff50c?rik=0%2f8IX%2fuxigpPFA&riu=http%3a%2f%2fwww.newdesignfile.com%2fpostpic%2f2009%2f11%2fimages-of-people-user-icon-transparent_85912.png&ehk=t7ZBMJwVRTqq14tYXsK3EF%2b83cLuMJg9Kh6P7BoLp6E%3d&risl=&pid=ImgRaw&r=0",
-                birthDay: "null",
-                address: "null",
-                phone: phoneNumber,
-                gender: "null",
+                birthDay: birthDay,
+                address: address,
+                phone: phone,
+                gender: gender,
                 status: true,
             });
             await data.save();
