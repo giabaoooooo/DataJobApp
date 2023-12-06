@@ -64,14 +64,14 @@ router.get('/new-career', async function (req, res, next) {
 
 //thêm mới career
 router.post('/add', [upload.single('image'),], async function (req, res, next) {
-  let { c_title, image } = req.body;
+  let { title, image } = req.body;
   console.log(req.body);
 
   try {
     console.log(req.file);
     img = await cloudinary.uploader.upload(req.file.path);
-    await careerController.add(c_title, img.secure_url);
-    // res.redirect('/careers');
+    await careerController.add(title, img.secure_url);
+    res.redirect('/careers');
     res.json({ status: true });
     console.log(img);
   } catch (error) {
@@ -120,7 +120,7 @@ router.get('/:id', async (req, res, next) => {
   let _id = req.params.id;
   try {
     let career = await careerController.findbyId(_id);
-    // res.render('careers/edit', { careers : career})
+    res.render('careers/edit', { careers : career})
     res.json({ data: career });
   } catch (error) {
     console.log(error);
@@ -141,12 +141,12 @@ router.post('/edit/:id', upload.single('image'), async function (req, res, next)
     one = await cloudinary.uploader.upload(req.file.path);
     image = one.secure_url;
   }
-  let c_title = req.body.c_title;
+  let title = req.body.title;
 
   try {
     // img = await cloudinary.uploader.upload(req.file.path);
-    await careerController.update(id, c_title, image);
-    // res.redirect('/careers');
+    await careerController.update(id, title, image);
+    res.redirect('/careers');
     res.json({ status: true });
     // console.log(img);
   } catch (error) {

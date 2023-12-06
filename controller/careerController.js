@@ -12,10 +12,10 @@ exports.getAll = async () => {
 }
 
 //thêm mới career
-exports.add = async (c_title, image) => {
+exports.add = async (title, image) => {
     try {
         const data = new careerModel({
-            c_title,
+            title,
             image
         });
         await data.save();
@@ -65,11 +65,11 @@ exports.findbyId = async (_id) => {
 }
 
 //update career
-exports.update = async (id, c_title, image) => {
+exports.update = async (id, title, image) => {
     console.log(image);
     try {
         const data = await careerModel.findByIdAndUpdate( id , {
-            c_title,
+            title,
             image
         });
         console.log("Sửa thành công");

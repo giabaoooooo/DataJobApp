@@ -204,31 +204,28 @@
                             <a href="index" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Home
+                                    Trang Chủ
                                 </p>
                             </a>
                         </li>
-
-                       
-
                         <li class="nav-item">
-                            <a href="posts" class="nav-link ">
+                            <a href="post-waiting" class="nav-link ">
                                 <i class="nav-icon fas fa-solid fa-flag"></i>
                                 <p>
-                                    Posts
+                                    Bài Đăng
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="careers" class="nav-link active">
                                 <i class="nav-icon fas fa-solid fa-user"></i>
-                                <p >
-                                    careers
+                                <p>
+                                    Ngành Nghề
                                 </p>
                             </a>
                         </li>
                          <li class="nav-item">
-                            <a href="userList" class="nav-link">
+                            <a href="users" class="nav-link">
                                 <i class="nav-icon fas fa-solid fa-user"></i>
                                 <p>
                                     Quản Lý User
@@ -284,7 +281,7 @@
                             <tbody>
                                 {{#each careers}}
                                 <tr>
-                                    <td>{{this.c_title}}</td>
+                                    <td>{{this.title}}</td>
                                     <td><img width="200" height="200"  src="{{this.image}}" alt=""></td>
                                     <td>
                                         <button type="button" class="btn btn-info" onclick="edit('{{this._id}}')">Edit</button>

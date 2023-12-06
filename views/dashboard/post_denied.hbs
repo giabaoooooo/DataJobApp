@@ -204,10 +204,10 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="index" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Home
+                                    Trang Chủ
                                 </p>
                             </a>
                         </li>
@@ -218,7 +218,7 @@
                             <a href="posts" class="nav-link active">
                                 <i class="nav-icon fas fa-solid fa-flag"></i>
                                 <p>
-                                    Posts
+                                    Bài Đăng
                                 </p>
                             </a>
                         </li>
@@ -226,12 +226,12 @@
                             <a href="careers" class="nav-link">
                                 <i class="nav-icon fas fa-solid fa-user"></i>
                                 <p>
-                                    careers
+                                    Ngành Nghề
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="userList" class="nav-link">
+                            <a href="users" class="nav-link">
                                 <i class="nav-icon fas fa-solid fa-user"></i>
                                 <p>
                                     Quản Lý User
@@ -436,13 +436,13 @@
             });
         }
         const postAllow = (id) => {
-            window.location.href = `/posts/post-allow?id=${id}`;
+            window.location.href = `/post-allow?id=${id}`;
         }
         const postWaiting = (id) => {
-            window.location.href = `/posts/post-waiting?id=${id}`;
+            window.location.href = `/post-waiting?id=${id}`;
         }
         const postDenied = (id) => {
-            window.location.href = `/posts/post-denied?id=${id}`;
+            window.location.href = `/post-denied?id=${id}`;
         }
         
         const AllowPost = (id) => {

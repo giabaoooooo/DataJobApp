@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 const currentTime = new Date();
 const postSchema = new Schema({
-    // _id: ObjectId,
     users_id: { type: String, ref: 'user', },
     address: String,
     businessName: String,

@@ -7,8 +7,7 @@
     <title>Admin | Post</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="/./fontawesome-free/css/all.min.css">
     <!-- IonIcons -->
@@ -28,13 +27,13 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a  class="nav-link" onclick="postAllow('{{this.status_id}}')">Bài đăng đã được duyệt</a>
+                    <a class="nav-link" onclick="postAllow('{{this.status_id}}')">Bài đăng đã được duyệt</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a  class="nav-link" onclick="postDenied('{{this.status_id}}')">Bài đăng không được duyệt</a>
+                    <a class="nav-link" onclick="postDenied('{{this.status_id}}')">Bài đăng không được duyệt</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a  class="nav-link"  onclick="postWaiting('{{this.status_id}}')">Bài đăng đang chờ duyệt</a>
+                    <a class="nav-link" onclick="postWaiting('{{this.status_id}}')">Bài đăng đang chờ duyệt</a>
                 </li>
             </ul>
 
@@ -48,8 +47,7 @@
                     <div class="navbar-search-block">
                         <form class="form-inline">
                             <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                                    aria-label="Search">
+                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
                                 <div class="input-group-append">
                                     <button class="btn btn-navbar" type="submit">
                                         <i class="fas fa-search"></i>
@@ -109,8 +107,7 @@
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         Nora Silvester
-                                        <span class="float-right text-sm text-warning"><i
-                                                class="fas fa-star"></i></span>
+                                        <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
                                     </h3>
                                     <p class="text-sm">The subject goes here</p>
                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
@@ -167,8 +164,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
-                <img src="/./img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
+                <img src="/./img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Admin</span>
             </a>
 
@@ -187,8 +183,7 @@
                 <!-- SidebarSearch Form -->
                 <div class="form-inline">
                     <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                            aria-label="Search">
+                        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
                         <div class="input-group-append">
                             <button class="btn btn-sidebar">
                                 <i class="fas fa-search fa-fw"></i>
@@ -199,26 +194,25 @@
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a href="index" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Home
+                                    Trang Chủ
                                 </p>
                             </a>
                         </li>
 
-                       
+
 
                         <li class="nav-item">
-                            <a href="posts" class="nav-link active">
+                            <a href="post-waiting" class="nav-link active">
                                 <i class="nav-icon fas fa-solid fa-flag"></i>
                                 <p>
-                                    Posts
+                                    Bài Đăng
                                 </p>
                             </a>
                         </li>
@@ -226,12 +220,12 @@
                             <a href="careers" class="nav-link">
                                 <i class="nav-icon fas fa-solid fa-user"></i>
                                 <p>
-                                    careers
+                                    Ngành Nghề
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="userList" class="nav-link">
+                            <a href="users" class="nav-link">
                                 <i class="nav-icon fas fa-solid fa-user"></i>
                                 <p>
                                     Quản Lý User
@@ -269,10 +263,10 @@
                 <div class="row">
                     <div class="col-md-12">
                         <!-- Advanced Tables -->
-                        
+
                         <div class="panel panel-default">
                             <div class="panel-heading" style="color: rgb(40, 0, 0);">
-                               - Danh sách các bài đăng đang chờ duyệt -
+                                - Danh sách các bài đăng đang chờ duyệt -
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -283,7 +277,7 @@
                                                 <th>Tiêu Đề</th>
                                                 <th>Địa Chỉ</th>
                                                 <th>Tên Doanh Nghiệp</th>
-                                                
+
                                                 <th>Số Lượng</th>
                                                 <th>Hình Ảnh</th>
                                                 <th>Action</th>
@@ -295,7 +289,7 @@
                                                 <td>{{this.title}}</td>
                                                 <td>{{this.address}}</td>
                                                 <td>{{this.businessName}}</td>
-                                                
+
                                                 <td>{{this.quantity}}</td>
                                                 <td>
                                                     {{#each this.image}}
@@ -303,10 +297,11 @@
                                                     {{/each}}
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-info ">Chấp nhận</button>
-                                                    <button type="button" class="btn btn-danger "
-                                                        onclick="confirmDelete('{{this._id}}')">Từ chối</button>
-                                                   
+                                                    <button type="button" class="btn btn-primary" onclick="AllowPost('{{this.id}}')">Chấp
+                                                        nhận</button>
+                                                    <button type="button" class="btn btn-danger " onclick="confirmDelete('{{this._id}}')">Từ
+                                                        chối</button>
+
                                                 </td>
                                             </tr>
                                             {{/each}}
@@ -441,19 +436,19 @@
             });
         }
         const postAllow = (id) => {
-            window.location.href = `/posts/post-allow?id=${id}`;
+            window.location.href = `/post-allow?id=${id}`;
         }
         const postWaiting = (id) => {
-            window.location.href = `/posts/post-waiting?id=${id}`;
+            window.location.href = `/post-waiting?id=${id}`;
         }
         const postDenied = (id) => {
-            window.location.href = `/posts/post-denied?id=${id}`;
+            window.location.href = `/post-denied?id=${id}`;
         }
 
         const AllowPost = (id) => {
-            window.location.href = `/posts/update-status?id=${id}`;
+            window.location.href = `/${id}}/change-status`;
         }
-        
+
     </script>
 </body>
 
