@@ -26,6 +26,7 @@ var genderRouter = require('./routes/gender.js');
 var savePostRouter = require('./routes/savePost');
 var applyRouter = require('./routes/apply');
 var adminRouter = require('./routes/admins');
+var notificationRouter = require('./routes/notifications.js')
 
 //connect to MongoDB
 var mongoose = require('mongoose');
@@ -70,7 +71,7 @@ app.use('/savePost', savePostRouter);
 app.use('/apply', applyRouter);
 app.use(express.static("dist"))
 app.use(express.static("plugins"))
-// app.use('/notifications', notificationRouter);
+app.use('/notifications', notificationRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

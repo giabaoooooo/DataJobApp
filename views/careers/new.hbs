@@ -17,12 +17,12 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            PRODUCT FORM
+                            THÊM MỚI
                         </div>
                         <div class="panel-body">
                             <form method="POST" action="/careers/add" enctype="multipart/form-data">
 
-                                <input type="text" name="c_title" value="{{careers.c_title}}" placeholder="Tên ngành nghề" /> <br />
+                                <input type="text" name="title" value="{{careers.title}}" placeholder="Tên ngành nghề" /> <br />
 
                                 {{!-- <input type="file" name="image" onchange="loadFile(event)" /> <br />
                                 <img width="300" height="250" id="image" alt="Image" src="{{careers.image}}" /> <br /> --}}
@@ -30,7 +30,7 @@
                                 <label class="form-label" for="customFile">Default file input example</label>
                                 <input type="file" class="form-control" name="image" />
 
-                                <input type="submit" value="Edit" />
+                                <input type="submit" value="Thêm" />
                             </form>
                         </div>
                     </div>

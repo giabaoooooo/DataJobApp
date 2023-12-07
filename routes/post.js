@@ -71,7 +71,7 @@ router.get('/:id/change-status', async (req, res, next) => {
             await PostController.changeStatus(id, newStatus);
             console.log(`Change status of report ${id} to ${newStatus ? 'activated' : 'deactivated'}`);
         }
-        res.redirect("/");
+        res.redirect("/post-allow");
     } catch (error) {
         console.log(error);
     }
@@ -80,7 +80,7 @@ router.get('/:id/change-status', async (req, res, next) => {
 //--------------------------------------------------------------------------------- APP -------------------------------------------------------------------------
 
 //Lấy danh sách tất cả bài đăng đã được duyệt
-router.get('/list', async function (req, res, next) {
+router.get('/listallow', async function (req, res, next) {
     const data = await postModel.find({ status_id: '65447e2296c02dcf49965471' }).populate('users_id').populate('career_id').populate('payForm_id').populate('experience_id').populate('academic_id').populate('workType_id').populate('status_id');
     data.reverse();
     res.json(data)

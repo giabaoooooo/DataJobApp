@@ -45,6 +45,7 @@ router.get('/', async function (req, res, next) {
   res.render('careers/list', { careers: data });
   // res.json(data);
   console.log("Lấy data thành công");
+  
 });
 
 //get detail by _id
@@ -64,13 +65,13 @@ router.get('/new-career', async function (req, res, next) {
 
 //thêm mới career
 router.post('/add', [upload.single('image'),], async function (req, res, next) {
-  let { c_title, image } = req.body;
+  let { title, image } = req.body;
   console.log(req.body);
 
   try {
     console.log(req.file);
     img = await cloudinary.uploader.upload(req.file.path);
-    await careerController.add(c_title, img.secure_url);
+    await careerController.add(title, img.secure_url);
     res.redirect('/careers');
     res.json({ status: true });
     console.log(img);
@@ -145,10 +146,10 @@ router.post('/edit/:id', upload.single('image'), async function (req, res, next)
     one = await cloudinary.uploader.upload(req.file.path);
     image = one.secure_url;
   }
-  let c_title = req.body.c_title;
+  let title = req.body.title;
   try {
     // img = await cloudinary.uploader.upload(req.file.path);
-    await careerController.update(id, c_title, image);
+    await careerController.update(id, title, image);
     res.redirect('/careers');
     res.json({ status: true });
     // console.log(img);

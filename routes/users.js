@@ -12,11 +12,11 @@ const userController = require('../controller/usersController');
 //   res.render('login', { title: 'Login Admin' });
 // });
 /* GET users listing. */
-// router.get('/list', async function (req, res, next) {
-//   const users = await user.find();
-//   res.json(users);
-//   // res.render('userList', { users: users });
-// });
+router.get('/list', async function (req, res, next) {
+  const users = await user.find();
+  res.json(users);
+  // res.render('userList', { users: users });
+});
 
 
 //nếu nhập đúng thông tin đăng nhập sẽ hiển thị thông báo và trả về token
