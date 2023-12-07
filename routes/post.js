@@ -7,8 +7,7 @@ const ImageModel = require('../modules/Image');
 const fs = require('fs');
 const dotenv = require('dotenv');
 dotenv.config();
-const PostController = require('../controller/PostController');
-
+const PostController = require('../controller/postController');
 //lấy danh sách theo id
 router.get('/list-by-id', async function (req, res, next) {
     var id = req.query.id;
