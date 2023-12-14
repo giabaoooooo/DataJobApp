@@ -65,15 +65,11 @@ router.get('/detail', async function (req, res, next) {
 //thêm mới career
 router.post('/add', [upload.single('image'),], async function (req, res, next) {
   let { c_title, image } = req.body;
-  console.log(req.body);
-
   try {
-    console.log(req.file);
     img = await cloudinary.uploader.upload(req.file.path);
     await careerController.add(c_title, img.secure_url);
     // res.redirect('/careers');
     res.json({ status: true });
-    console.log(img);
   } catch (error) {
     console.error(error);
   }
@@ -110,15 +106,12 @@ router.delete('/delete/:id', async function (req, res, next) {
 
 //update career
 router.post('/edit/:id', upload.single('image'), async function (req, res, next) {
-  console.log("Trang sửa");
   let id = req.params.id;
-  console.log(id);
   let { c_title, img } = req.body;
   try {
     img = await cloudinary.uploader.upload(req.file.path);
     await careerController.update(id, c_title, img.secure_url);
     res.redirect('/careers');
-    console.log(img);
   } catch (error) {
     console.error(error);
   }
