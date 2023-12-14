@@ -71,6 +71,19 @@ router.get('/change-status/:id', async (req, res, next) => {
         console.log(error);
     }
 });
+router.get('/:id/change-status', async (req, res, next) => {
+    let id = req.params.id;
+    try {
+        const posts = await PostController.getById(id);
+        if (posts) {
+            const newStatus = "65447e3996c02dcf49965472"; // Đảo ngược trạng thái hiện tại
+            await PostController.changeStatus(id, newStatus);
+        }
+        res.redirect("/posts/post-denied");
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 //=========================================================================== APP ==========================================================================//
 

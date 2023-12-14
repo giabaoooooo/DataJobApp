@@ -304,11 +304,8 @@
                                                 </td>
                                                 <td>
                                                     <button type="button" class="btn btn-success" onclick="AllowPost('{{this.id}}')">Duyệt Bài</button>
-                                                    <button type="button" class="btn btn-danger" onclick="showReasonInput('{{this.id}}')">Từ chối</button>
-                                                    <div id="reasonInput_{{this._id}} "style="display: none;">
-                                                        <input type="text" id="reason_{{this_id}}" placeholder="Nhập lý do từ chối"/>
-                                                        <button type="button" class="btn btn-primary">Xác nhận</button>
-                                                    </div>
+                                                    <button type="button" class="btn btn-danger" onclick="DeniedPost('{{this.id}}')">Từ chối</button>
+                                                   
                                                    
                                                 </td>
                                             </tr>
@@ -456,12 +453,12 @@
        const AllowPost = (id) => {
             window.location.href = `/posts/change-status/${id}`;
         }
-
-
-        function showReasonInput(postId){
-            const reasonInput = document.getElementById('reasonInput_${postId}')
-            reasonInput.style.display = 'block';
+        const DeniedPost = (id) => {
+            window.location.href = `/posts/${id}/change-status`;
         }
+
+
+        
         
     </script>
 </body>
