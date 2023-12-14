@@ -1,42 +1,49 @@
 const jwt = require('jsonwebtoken');
 var express = require('express');
+var cvController = require('../controller/cvController');
 var router = express.Router();
-var cvModules = require('../modules/cv');
-
-//lấy tất cả cv
-router.get('/list', async function (req, res, next) {
-    var data = await cvModules.find().populate('experience_id').populate('career_id').populate('acedemic_id').populate('worktype_id').populate('payform_id');
-    res.json(data);
-    console.log(data);
-});
 
 //thêm mới
-router.post('/add-cv', async function (req, res, next) {
+router.post('/new', async function (req, res, next) {
+    let { title, user_id, career_id, name, phone, year, email, address, experience_id, introduce, gender_id, academic_id } = req.body;
     try {
-        const cv = new cvModules(req.body);
-        const data = new cvModules({
-            current_andress: "32/1 đường 1, phường 2, quận 3, tp HCM",
-            title: "Tiêu đề",
-            experience_id: "655deac79a5b0ffa7ffd513f",
-            career_id: "6558505e70f5b03183a9c903",
-            acedemic_id: "655de7129a5b0ffa7ffd5137",
-            worktype_id: "653e66b38e88b23b41388e3c",
-            payform_id: "355de22b9a5b0ffa7ffd5132",
-            describe: "Mô tả công việc",
-            user_id: "655b3b0e806637ac5b292b4c",
-        });
-        await data.save();
-        res.json({message: "Thêm mới thành công", data: data});
+        let data = await cvController.insert(title, user_id, career_id, name, phone, year, email, address, experience_id, introduce, gender_id, academic_id);
+        res.json(data);
     } catch (error) {
         console.log(error);
     }
 });
 
-
 //lấy danh sách theo users_id
 router.post('/myCVs', async function (req, res, next) {
-    var data = await cvModules.find({user_id: req.body.id}).populate('experience_id').populate('career_id').populate('acedemic_id').populate('worktype_id').populate('payform_id').populate('user_id');
+    let data = await cvController.getMyCV(req.body);
     res.json(data);
-    console.log(data);
 });
+
+//lấy danh sách theo career
+router.post('/myCVsByCareer', async function (req, res, next) {
+    let data = await cvController.getMyCVByCareer(req.body);
+    res.json(data);
+});
+
+//lấy cv mới theo users_id
+router.post('/first', async function (req, res, next) {
+    let data = await cvController.first(req.body.id);
+    res.json(data);
+});
+// Update Cv
+router.post('/update', async function (req, res, next) {
+    let { title, _id, career_id, name, phone, year, email, address, experience_id, introduce, gender_id, academic_id } = req.body;
+    try {
+        let data = await cvController.update(title, _id, career_id, name, phone, year, email, address, experience_id, introduce, gender_id, academic_id);
+        res.json(data);
+    } catch (error) {
+        console.log(error);
+    }
+});
+// Xóa Cv
+router.post('/delete', async function (req, res, next) {
+    let data = await cvController.delete(req.body.id);
+    res.json(data);
+})
 module.exports = router;

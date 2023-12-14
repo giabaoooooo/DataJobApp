@@ -22,12 +22,20 @@ const notificationSchema = new Schema({
         type: String,
         ref: 'cvs',
     },
-    typeNotification: {
-        type: String,
+    category: {
+        type: Number,
     },
-    date: { type: Date, default: Date.now() },
-    time: { type: String, default: currentTime.getHours() + ":" + currentTime.getMinutes() + ":" + currentTime.getSeconds() },
+    seen: {
+        type: Number,
+    },
+    date: { type: Date },
+    time: { type: String }
 })
 
+notificationSchema.pre('save', function (next) {
+    this.date = new Date().toISOString().slice(0, 10);
+    this.time = currentTime.getHours() + ":" + currentTime.getMinutes() + ":" + currentTime.getSeconds();
+    next();
+});
 
 module.exports = mongoose.model.notification || mongoose.model('notification', notificationSchema);

@@ -2,7 +2,7 @@ const User = require('../modules/user');
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client('598708373288-vlbap93edc5r144q7cnealcu8vls110o.apps.googleusercontent.com')
 
-// SignIn with Google
+// Check with Google
 async function checkGoogleID(token) {
     try {
         const ticket = await client.verifyIdToken({
@@ -22,15 +22,44 @@ async function checkGoogleID(token) {
         if (existingUser) {
             return existingUser;
         } else {
-            const data = new User({
+            const data = {
                 googleId: userId,
                 displayName: name,
                 email: email,
                 photo: picture,
-                birthDay: "null",
-                address: "null",
-                phone: 0,
-                gender: "null",
+                birthDay: "",
+                address: "",
+                phone: null,
+                gender: "",
+                role: null,
+                favoriteCareers : [],
+                status: false,
+            };
+            return data;
+        }
+    } catch (error) {
+        console.log("err :" + error);
+    }
+};
+// SignIn with Google
+async function googleSignIn(token) {
+    try {
+        const existingUser = await User.findOne({ googleId: token?.inputs?.googleId });
+
+        if (existingUser) {
+            return existingUser;
+        } else {
+            const data = new User({
+                googleId: token?.inputs?.googleId,
+                displayName: token?.inputs?.displayName,
+                email: token?.inputs?.email,
+                photo: token?.inputs?.photo,
+                birthDay: token?.inputs?.birthDay,
+                address: token?.inputs?.address,
+                phone: token?.inputs?.phone,
+                gender: token?.inputs?.gender,
+                role: token?.inputs?.role,
+                favoriteCareers: token?.inputs?.favoriteCareers,
                 status: true,
             });
             await data.save();
@@ -70,4 +99,4 @@ async function checkPhoneNumber(displayName, birthDay, address, phone, gender,) 
     }
 }
 
-module.exports = { checkGoogleID, checkPhoneNumber };
+module.exports = { checkGoogleID, checkPhoneNumber, googleSignIn };

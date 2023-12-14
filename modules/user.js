@@ -35,6 +35,14 @@ const user = new Schema({
         type: String,
         required: true,
     },
+    role: {
+        type: Number,
+        required: true,
+    },
+    favoriteCareers: {
+        type: [],
+        required: true,
+    },
     status: {
         type: Boolean,
         required: true,
