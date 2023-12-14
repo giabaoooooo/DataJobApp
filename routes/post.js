@@ -7,8 +7,7 @@ const ImageModel = require('../modules/Image');
 const fs = require('fs');
 const dotenv = require('dotenv');
 dotenv.config();
-const PostController = require('../controller/PostController');
-
+const PostController = require('../controller/postController');
 //lấy danh sách theo id
 router.get('/list-by-id', async function (req, res, next) {
     var id = req.query.id;
@@ -26,7 +25,8 @@ router.get('/list-by-user', async function (req, res, next) {
 //lấy danh sách theo status_id
 router.get('/post-waiting', async function (req, res, next) {
     try {
-        const data = await postModel.find({ status_id: "65423efa3f8e779b5ec14e51" });//đang chờ duyệt
+        
+        const data = await postModel.find({ status_id: "65423efa3f8e779b5ec14e51"});//đang chờ duyệt
         res.render('dashboard/post_waiting', { posts: data });
         return data;
     } catch (error) {
@@ -61,7 +61,9 @@ router.get('/detail', async function (req, res, next) {
 
 //auto update status_id when click
 router.get('/:id/change-status', async (req, res, next) => {
+    // console.log("ABC");
     let id = req.params.id;
+    // console.log(req.body);
     console.log("ewwef", id);
     try {
         const posts = await PostController.getById(id);
@@ -75,12 +77,13 @@ router.get('/:id/change-status', async (req, res, next) => {
     } catch (error) {
         console.log(error);
     }
+    
 });
 
 //--------------------------------------------------------------------------------- APP -------------------------------------------------------------------------
 
 //Lấy danh sách tất cả bài đăng đã được duyệt
-router.get('/listallow', async function (req, res, next) {
+router.get('/list', async function (req, res, next) {
     const data = await postModel.find({ status_id: '65447e2296c02dcf49965471' }).populate('users_id').populate('career_id').populate('payForm_id').populate('experience_id').populate('academic_id').populate('workType_id').populate('status_id');
     data.reverse();
     res.json(data)

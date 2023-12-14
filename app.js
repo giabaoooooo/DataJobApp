@@ -7,6 +7,7 @@ const dotev = require('dotenv');
 const cors = require('cors');
 dotev.config();
 
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/UsersRouter');
 var career = require('./routes/screen/career');
@@ -64,7 +65,7 @@ app.use('/experiences', experienceRouter);
 app.use('/payforms', payformRouter);
 app.use('/worktypes', worktypeRouter);
 app.use('/status', statusRouter);
-app.use('/', postRouter);
+app.use('/posts', postRouter);
 app.use('/test', testimgRouter);
 app.use('/gender', genderRouter);
 app.use('/savePost', savePostRouter);
