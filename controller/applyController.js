@@ -13,6 +13,7 @@ exports.insert = async (sender_id, receiver_id, post_id, cv_id, salary) => {
             feedback: '',
         });
         await data.save();
+        return data;
     } catch (error) {
         console.log(error);
     }
@@ -30,6 +31,7 @@ exports.update = async (id) => {
     }
 }
 exports.updateAccept = async (id) => {
+    console.log("ddad : ",id);
     try {
         const data = await applyModel.findOneAndUpdate(
             { _id: id }, {

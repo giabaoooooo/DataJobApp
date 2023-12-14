@@ -137,8 +137,7 @@ router.post('/postForApp', async (req, res) => {
 router.post('/update', async (req, res) => {
     let { _id, businessName, address, image, title, quantity, gender, career_id, workType_id, payForm_id, wageMin, wageMax, describe, ageMin, ageMax, academic_id, experience_id} = req.body;
     try {
-        await PostController.update(_id, businessName, address, image, title, quantity, gender, career_id, workType_id, payForm_id, wageMin, wageMax, describe, ageMin, ageMax, academic_id, experience_id)
-        res.send("Successful");
+        await PostController.update(_id, businessName, address, image, title, quantity, gender, career_id, workType_id, payForm_id, wageMin, wageMax, describe, ageMin, ageMax, academic_id, experience_id);
     } catch (error) {
         console.log(error);
     }

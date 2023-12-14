@@ -17,5 +17,10 @@ router.post('/listNoSeen', async function (req, res, next) {
     var data = await notificationController.getByIdNoSeen(req.body.receiver_id);
     res.json(data);
 });
-
+//update status seen
+router.post('/Seen', async function (req, res, next) {
+    console.log(req.body.id);
+    var data = await notificationController.updateSeen(req.body.id);
+    res.json(data);
+});
 module.exports = router;
