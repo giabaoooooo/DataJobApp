@@ -104,7 +104,7 @@ router.delete('/delete/:id', async function (req, res, next) {
 });
 
 
-router.get('/:id', async function(req, res, next) {
+router.get('/edit/:id', async function(req, res, next) {
   // get product detail
   const {id} = req.params;
   const result = await careerController.findbyId(id);
