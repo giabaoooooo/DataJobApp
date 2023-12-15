@@ -5,7 +5,7 @@ var cvModules = require('../modules/cv');
 
 //lấy tất cả cv
 router.get('/list', async function (req, res, next) {
-    var data = await cvModules.find().populate('experience_id').populate('career_id').populate('acedemic_id').populate('worktype_id').populate('payform_id').populate('user_id');
+    var data = await cvModules.find().populate('experience_id').populate('career_id').populate('acedemic_id').populate('worktype_id').populate('payform_id');
     res.json(data);
     console.log(data);
 });
@@ -34,12 +34,9 @@ router.post('/add-cv', async function (req, res, next) {
 
 
 //lấy danh sách theo users_id
-router.get('/list/:id', async function (req, res, next) {
-    var data = await cvModules.find({user_id: req.params.id}).populate('experience_id').populate('career_id').populate('acedemic_id').populate('worktype_id').populate('payform_id').populate('user_id');
+router.post('/myCVs', async function (req, res, next) {
+    var data = await cvModules.find({user_id: req.body.id}).populate('experience_id').populate('career_id').populate('acedemic_id').populate('worktype_id').populate('payform_id').populate('user_id');
     res.json(data);
     console.log(data);
 });
-
-
-
 module.exports = router;

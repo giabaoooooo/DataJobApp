@@ -56,10 +56,10 @@ router.get('/detail', async function (req, res, next) {
   res.json({ data: data });
 });
 
-//render new career
-router.get('/new-career', async function (req, res, next) {
-  res.render('careers/new');
-});
+// //render new career
+// router.get('/new-career', async function (req, res, next) {
+//   res.render('careers/new');
+// });
 
 
 //thêm mới career
@@ -107,18 +107,18 @@ router.delete('/delete/:id', async function (req, res, next) {
 
 });
 
-router.get('/:id', async (req, res, next)=> { 
- 
-  let _id = req.params.id;
-  try {
-    let career = await careerController.findbyId(_id);
-    // res.render('careers/edit', { careers : career})
-    res.json({ data: career });
-  } catch (error) {
-    console.log(error);
-  }
+// router.get('/:id', async (req, res, next) => {
+//   console.log("Trang sửa");
+//   let _id = req.params.id;
+//   try {
+//     let career = await careerController.findbyId(_id);
+//     // res.render('careers/edit', { careers : career})
+//     res.json({ data: career });
+//   } catch (error) {
+//     console.log(error);
+//   }
 
-});
+// });
 
 //update career
 router.post('/edit/:id', upload.single('image'), async function (req, res, next) {
@@ -138,6 +138,12 @@ router.post('/edit/:id', upload.single('image'), async function (req, res, next)
 });
 
 
+//---------------------- APP ----------------------------------
 
+// Get data careers
+router.get('/listCareersForApp', async function (req, res, next) {
+  const data = await careerController.getAll();
+  res.json(data);
+});
 
 module.exports = router;

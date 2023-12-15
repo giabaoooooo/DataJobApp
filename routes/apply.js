@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const applyModules = require('../modules/apply');
 const applyController = require('../controller/applyController');
+const notificationController = require('../controller/notificationController');
 const cvModules = require('../modules/cv');
 
 //get all
@@ -23,14 +24,13 @@ router.get('/list', async function (req, res, next) {
 
 //add new 
 router.post('/add', async function (req, res, next) {
+    let { receiver_id, sender_id, post_id, cv_id } = req.body;
+    let typeNotification = "Apply";
     try {
-        const data = new applyModules({
-            post_id: "656065542aa3e77c890f57d7",
-            cv: "655f3ae3f8a697a6633c53c4"
-        });
-        await data.save();
-        console.log("Thêm mới thành công");
-        res.json({ message: "Thêm mới thành công", data: data });
+        await applyController.insert(post_id, cv_id);
+
+        await notificationController.insert(receiver_id, sender_id, post_id, cv_id, typeNotification);
+        res.send("Successful");
     } catch (error) {
         console.log(error);
     }
