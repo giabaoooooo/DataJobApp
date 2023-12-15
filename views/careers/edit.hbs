@@ -20,9 +20,11 @@
                             PRODUCT FORM
                         </div>
                         <div class="panel-body">
+
                             <form method="POST" action="/careers/edit/{{careers._id}}" enctype="multipart/form-data">
 
-                                <input type="text" name="c_title" value="{{careers.c_title}}" placeholder="Tên ngành nghề" /> <br />
+
+                                <input type="text" name="title" value="{{careers.title}}" placeholder="Tên ngành nghề" /> <br />
 
                                 {{!-- <input type="file" name="image" onchange="loadFile(event)" /> <br />
                                 <img width="300" height="250" id="image" alt="Image" src="{{careers.image}}" /> <br /> --}}
@@ -39,6 +41,7 @@
                 </div>
             </div>
         </div>
+    </div>
         <script>
             //load image 
             var loadFile = function (event) {
