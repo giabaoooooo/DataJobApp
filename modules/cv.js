@@ -3,29 +3,29 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 const cvSchema = new Schema({
     // _id: ObjectId,
-    current_andress: String,
     title: String,
+    name: String,
+    phone: String,
+    gender_id: {
+        type: String,
+        ref: 'gender'
+    },
+    email: String,
+    career_id: {
+        type: String,
+        ref: 'career'
+    },
+    address: String,
     experience_id:{
         type: String,
-        ref: 'experience',
+        ref: 'experience'
     },
-    career_id: {
-        type: ObjectId,
-        ref: 'career',
-    },
-    acedemic_id: {
+    academic_id: {
         type: String,
         ref: 'acedemic',
     },
-    worktype_id: {
-        type: String,
-        ref: 'worktype',
-    },
-    payform_id: {
-        type: String,
-        ref: 'payform',
-    },
-    describe: String,
+    year: String,
+    introduce: String,
     user_id: {
         type: String,
         ref: 'user',

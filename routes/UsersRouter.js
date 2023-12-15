@@ -16,6 +16,11 @@ router.get('/list', async function (req, res, next) {
 
 // Đăng nhập bằng Google
 router.post('/GoogleSignIn', async function (req, res) {
+  const user = await UserController.googleSignIn(req.body);
+  res.send(user);
+});
+// Check tài khoản
+router.post('/GoogleCheck', async function (req, res) {
   var token = req.body.idtoken;
   const user = await UserController.checkGoogleID(token);
   res.send(user);
