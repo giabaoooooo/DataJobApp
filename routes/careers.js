@@ -104,12 +104,12 @@ router.delete('/delete/:id', async function (req, res, next) {
 });
 
 
-router.get('/:id', async function(req, res, next) {
-  // get product detail
-  const {id} = req.params;
-  const result = await careerController.findbyId(id);
-  res.render('careers/edit', {careers:result});
-});
+// router.get('/:id', async function(req, res, next) {
+//   // get product detail
+//   const {id} = req.params;
+//   const result = await careerController.findbyId(id);
+//   res.render('careers/edit', {careers:result});
+// });
 
 // //update career
 // router.post('/edit/:id', upload.single('image'), async function (req, res, next) {

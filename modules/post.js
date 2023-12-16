@@ -3,11 +3,7 @@ const Schema = mongoose.Schema;
 const currentTime = new Date();
 
 const postSchema = new Schema({
-<<<<<<< HEAD
-    users_id: { type: String, ref: 'user', },
-=======
     users_id: { type: String, ref: 'user' },
->>>>>>> VanChuc
     businessName: String,
     address: String,
     image: Array,
@@ -24,12 +20,6 @@ const postSchema = new Schema({
     ageMax: Number,
     wageMin: Number,
     wageMax: Number,
-<<<<<<< HEAD
-    status_id: {type: String, ref: 'status',},
-    date: { type: Date, default: Date.now() },
-    time: { type: String, default: currentTime.getHours() + ":" + currentTime.getMinutes() + ":" + currentTime.getSeconds() },
-})
-=======
     status_id: { type: String, ref: 'status' },
     date: { type: Date },
     time: { type: String }
@@ -41,6 +31,5 @@ postSchema.pre('save', function(next) {
     this.time = currentTime.getHours() + ":" + currentTime.getMinutes() + ":" + currentTime.getSeconds();
     next();
 });
->>>>>>> VanChuc
 
 module.exports = mongoose.model.post || mongoose.model('post', postSchema);
