@@ -48,7 +48,7 @@ app.use(express.json());
 
 app.use(express.static("styles"));
 
-app.use('/', indexRouter);
+app.use('/index', indexRouter);
 app.use('/users', usersRouter);
 
 app.use('/acedemics', aceRouter);
@@ -64,6 +64,8 @@ app.use('/gender', genderRouter);
 app.use('/savePost', savePostRouter);
 app.use('/apply', applyRouter);
 app.use('/notifications', notificationRouter);
+app.use(express.static("dist"))
+app.use(express.static("plugins"))
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

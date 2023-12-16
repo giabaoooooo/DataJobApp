@@ -42,8 +42,8 @@ router.post('/upload-image', upload.array('images', 5), async function (req, res
 // });
 router.get('/list', async function (req, res, next) {
   const data = await careerController.getAll();
-  // res.render('careers/list', { careers: data });
-  res.json(data);
+  res.render('careers/list', { careers: data });
+  // res.json(data);
   console.log("Lấy data thành công");
 });
 
@@ -101,6 +101,13 @@ router.delete('/delete/:id', async function (req, res, next) {
     res.json({ status: false });
   }
 
+});
+
+//render edit screen
+router.get('/edit/:id', async function (req, res, next) {
+  let id = req.params.id;
+  const data = await careerController.getDetail(id);
+  res.render('careers/edit', { career: data });
 });
 
 

@@ -11,7 +11,8 @@ router.get('/', function (req, res, next) {
 /* GET users listing. */
 router.get('/list', async function (req, res, next) {
   const users = await user.find();
-  res.json(users);
+  // res.json(users);
+  res.render('userList', { users: users });
 });
 
 // Đăng nhập bằng Google
