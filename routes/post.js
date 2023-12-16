@@ -57,9 +57,8 @@ router.get('/detail', async function (req, res, next) {
     const data = await postModel.findById({ _id: id });
     res.json(data);
 });
-//auto update status_id when click
+// auto update status_id when click
 router.get('/change-status/:id', async (req, res, next) => {
-    // console.log("Hello")
     let id = req.params.id;
     try {
         const posts = await PostController.getById(id);
@@ -67,7 +66,20 @@ router.get('/change-status/:id', async (req, res, next) => {
             const newStatus = "65447e2296c02dcf49965471"; // Đảo ngược trạng thái hiện tại
             await PostController.changeStatus(id, newStatus);
         }
-        res.redirect("/posts/post-waiting");
+        res.redirect("/posts/post-allow");
+    } catch (error) {
+        console.log(error);
+    }
+});
+router.get('/:id/change-status', async (req, res, next) => {
+    let id = req.params.id;
+    try {
+        const posts = await PostController.getById(id);
+        if (posts) {
+            const newStatus = "65447e3996c02dcf49965472"; // Đảo ngược trạng thái hiện tại
+            await PostController.changeStatus(id, newStatus);
+        }
+        res.redirect("/posts/post-denied");
     } catch (error) {
         console.log(error);
     }
