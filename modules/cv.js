@@ -5,22 +5,27 @@ const cvSchema = new Schema({
     // _id: ObjectId,
     title: String,
     name: String,
-    address: String,
-    experience:{
+    phone: String,
+    gender_id: {
         type: String,
+        ref: 'gender'
     },
-    acedemic_id: {
+    email: String,
+    career_id: {
+        type: String,
+        ref: 'career'
+    },
+    address: String,
+    experience_id:{
+        type: String,
+        ref: 'experience'
+    },
+    academic_id: {
         type: String,
         ref: 'acedemic',
     },
     year: String,
-    email: String,
-    phone: String,
     introduce: String,
-    gender: {
-        type: String,
-        ref: 'gender'
-    },
     user_id: {
         type: String,
         ref: 'user',
