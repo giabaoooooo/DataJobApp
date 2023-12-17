@@ -131,30 +131,11 @@ router.get('/:id', async function(req, res, next) {
 //update career
 router.post('/edit/:id', upload.single('image'), async function (req, res, next) {
   let id = req.params.id;
-<<<<<<< HEAD
-  let career = await careerController.findbyId(id);
-  let Img = req.file;
-  let image;
-  let one;
-  if (Img == null) {
-    image = career.image;
-  } else {
-    one = await cloudinary.uploader.upload(req.file.path);
-    image = one.secure_url;
-  }
-  let c_title = req.body.c_title;
-=======
   let { c_title, img } = req.body;
->>>>>>> origin/VanChuc
   try {
     // img = await cloudinary.uploader.upload(req.file.path);
     await careerController.update(id, c_title, image);
     res.redirect('/careers');
-<<<<<<< HEAD
-    res.json({ status: true });
-    // console.log(img);
-=======
->>>>>>> origin/VanChuc
   } catch (error) {
     console.error(error);
   }

@@ -9,7 +9,7 @@ dotev.config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/UsersRouter');
-var career = require('./routes/screen/career');
+var career = require('./routes/careers.js');
 var users = require('./routes/users.js');
 
 
