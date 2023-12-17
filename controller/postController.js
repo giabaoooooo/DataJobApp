@@ -98,7 +98,8 @@ exports.getSuggestion = async (data) => {
         const posts = [];
         if (data && data.length > 0) {
             for (const career of data) {
-                const foundPosts = await postModel.find({ career_id: career, status_id: '65447e2296c02dcf49965471' }).populate('users_id').populate('career_id').populate('payForm_id').populate('experience_id').populate('academic_id').populate('workType_id').populate('status_id');
+                const foundPosts = await postModel.find({ career_id: career, status_id: '65447e2296c02dcf49965471' })
+                    .populate('users_id').populate('career_id').populate('payForm_id').populate('experience_id').populate('academic_id').populate('workType_id').populate('status_id');
                 posts.push(...foundPosts);
             }
         }
@@ -119,7 +120,7 @@ exports.searchByKey = async (key) => {
                     { address: { $regex: key } },
                     { businessName: { $regex: key } },
                 ]
-            });
+            }).populate('users_id').populate('career_id').populate('payForm_id').populate('experience_id').populate('academic_id').populate('workType_id').populate('status_id');
             return posts;
         }
         return [];

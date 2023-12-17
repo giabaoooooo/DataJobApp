@@ -2,8 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 const moment = require('moment');
-const currentTime = new Date();
-const time = moment(currentTime).format('HH:mm:ss DD/MM/YYYY');
 const notificationSchema = new Schema({
     // _id: ObjectId,
     receiver_id: {
@@ -33,6 +31,7 @@ const notificationSchema = new Schema({
 })
 
 notificationSchema.pre('save', function (next) {
+    const currentTime = new Date();
     this.date = new Date().toISOString().slice(0, 10);
     this.time = currentTime.getHours() + ":" + currentTime.getMinutes() + ":" + currentTime.getSeconds();
     next();
