@@ -60,7 +60,7 @@ router.get('/detail', async function (req, res, next) {
 });
 
 //auto update status_id when click
-router.get('/:id/change-status', async (req, res, next) => {
+router.get('/change-status/:id', async (req, res, next) => {
     // console.log("ABC");
     let id = req.params.id;
     // console.log(req.body);
