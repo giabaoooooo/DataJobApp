@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 var express = require('express');
 var router = express.Router();
 const user = require('../modules/user');
-let UserController = require('../controller/UserController');
+let UserController = require('../controller/userController');
 
 //get layout login
 // router.get('/', function (req, res, next) {

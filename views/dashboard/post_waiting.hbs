@@ -435,17 +435,17 @@
             });
         }
         const postAllow = (id) => {
-            window.location.href = `/post-allow?id=${id}`;
+            window.location.href = `/posts/post-allow?id=${id}`;
         }
         const postWaiting = (id) => {
-            window.location.href = `/post-waiting?id=${id}`;
+            window.location.href = `/posts/post-waiting?id=${id}`;
         }
         const postDenied = (id) => {
-            window.location.href = `/post-denied?id=${id}`;
+            window.location.href = `/posts/post-denied?id=${id}`;
         }
 
         const AllowPost = (id) => {
-            window.location.href = `/${id}/change-status`;
+            window.location.href = `/posts/${id}/change-status`;
         }
 
     </script>
