@@ -18,7 +18,7 @@ async function checkGoogleID(token) {
         const picture = payload['picture'];
 
         const existingUser = await User.findOne({ googleId: userId });
-        
+
         if (existingUser) {
             return existingUser;
         } else {
@@ -32,7 +32,7 @@ async function checkGoogleID(token) {
                 phone: null,
                 gender: "",
                 role: null,
-                favoriteCareers : [],
+                favoriteCareers: [],
                 status: false,
             };
             return data;
@@ -84,7 +84,7 @@ async function checkPhoneNumber(displayName, birthDay, address, phone, gender,) 
                 googleId: "null",
                 displayName: displayName,
                 email: "null",
-photo: "https://th.bing.com/th/id/R.0e2d903d47176e8d432d64aed96ff50c?rik=0%2f8IX%2fuxigpPFA&riu=http%3a%2f%2fwww.newdesignfile.com%2fpostpic%2f2009%2f11%2fimages-of-people-user-icon-transparent_85912.png&ehk=t7ZBMJwVRTqq14tYXsK3EF%2b83cLuMJg9Kh6P7BoLp6E%3d&risl=&pid=ImgRaw&r=0",
+                photo: "https://th.bing.com/th/id/R.0e2d903d47176e8d432d64aed96ff50c?rik=0%2f8IX%2fuxigpPFA&riu=http%3a%2f%2fwww.newdesignfile.com%2fpostpic%2f2009%2f11%2fimages-of-people-user-icon-transparent_85912.png&ehk=t7ZBMJwVRTqq14tYXsK3EF%2b83cLuMJg9Kh6P7BoLp6E%3d&risl=&pid=ImgRaw&r=0",
                 birthDay: birthDay,
                 address: address,
                 phone: phone,
@@ -93,7 +93,7 @@ photo: "https://th.bing.com/th/id/R.0e2d903d47176e8d432d64aed96ff50c?rik=0%2f8IX
             });
             await data.save();
             return data;
-        } 
+        }
     } catch (error) {
         console.log("err : " + error);
     }
