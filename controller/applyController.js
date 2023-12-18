@@ -31,7 +31,6 @@ exports.update = async (id) => {
     }
 }
 exports.updateAccept = async (id) => {
-    console.log("ddad : ",id);
     try {
         const data = await applyModel.findOneAndUpdate(
             { _id: id }, {

@@ -27,7 +27,6 @@ exports.getById = async (_id) => {
                     model: 'user'
                 }
             })
-        data.reverse();
         return data;
     } catch (error) {
         console.log(error);
