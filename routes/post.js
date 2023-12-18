@@ -84,6 +84,17 @@ router.get('/:id/change-status', async (req, res, next) => {
         console.log(error);
     }
 });
+router.get('/daily', async (req, res) => {
+    try {
+        const startDate = req.query.startDate;
+        const endDate = req.query.endDate;
+        let dailyStats = await PostController.getDailyStats(startDate, endDate);
+        res.json(dailyStats);
+    } catch (error) {
+        console.log("Error in daily stats route:", error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 //=========================================================================== APP ==========================================================================//
 
@@ -156,17 +167,17 @@ router.post('/update', async (req, res) => {
     }
 });
 //delete post
-router.get('/delete/:id', async (req, res, next) => {
-    let id = req.params.id;
+router.post('/delete', async (req, res, next) => {
+    let id = req.body.id;
     try {
-        const data = await postModel.deleteOne({ _id: id });
-        if (data.deletedCount === 1) {
-            console.log("Xóa thành công");
-            res.json({ status: true });
+        const data = await postModel.find({ _id: id });
+        const test = [data];
+        if (test.status_id === "65423efa3f8e779b5ec14e51") {
+            const tempData = await postModel.deleteOne({ _id : id });
+            res.json(tempData);
         } else {
-            console.log("Xóa không thành công");
-            res.json({ status: false });
-        }
+            
+        } 
     } catch (error) {
         console.log(error);
     }

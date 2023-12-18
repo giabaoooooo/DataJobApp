@@ -30,7 +30,7 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Trang chủ</a>
                 </li>
-               
+
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -124,7 +124,7 @@
                         <div class="col-sm-6">
                             <h1 class="m-0">Trang chủ</h1>
                         </div><!-- /.col -->
-                        
+
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -327,79 +327,49 @@
                             {{!-- TK --}}
                             <div class="card">
                                 <div class="card-header border-0">
-                                    <h3 class="card-title">Daily Statistics</h3>
+                                    <h3 class="card-title">Thống kê bài đăng được duyệt theo ngày</h3>
                                     <div class="card-tools">
                                         <form id="dateRangeForm">
-                                            <label for="startDate">Start Date:</label>
+                                            <label for="startDate">Từ :</label>
                                             <input type="date" id="startDate" name="startDate" required>
-                            
-                                            <label for="endDate">End Date:</label>
+                                            <label for="endDate">Đến :</label>
                                             <input type="date" id="endDate" name="endDate" required>
-                            
-                                            <button type="button" onclick="fetchAndDrawStats()">Filter</button>
-                                            
-
-
-
-                                             <div class="card-body">
-                                <div class="table-responsive">
-
-                                    <table id="example1" class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Tiêu Đề</th>
-                                               
-                                               
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {{#each posts}}
-                                            <tr>
-                                                <td>{{this.title}}</td>
-                                                
-                                               
-                                            </tr>
-                                            {{/each}}
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-                                        
-
-
-
-
-
+                                            <button type="button" class="btn btn-success" onclick="fetchAndDrawStats()">Lọc</button>
                                         </form>
                                     </div>
                                 </div>
-                            
                                 <div class="card-body">
-                            
                                     <canvas id="dailyChart" height="225" width="760"></canvas>
-                            
                                 </div>
                             </div>
                         </div>
-                        <!-- /.col-md-6 -->
                     </div>
-                    <!-- /.row -->
+
+                    <div class="card-body">
+
+                        <canvas id="dailyChart" height="225" width="760"></canvas>
+
+                    </div>
                 </div>
-                <!-- /.container-fluid -->
             </div>
-            <!-- /.content -->
+            <!-- /.col-md-6 -->
         </div>
-        <!-- /.content-wrapper -->
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
 
-        <!-- Main Footer -->
-       
+    <!-- Main Footer -->
+
     </div>
     <!-- ./wrapper -->
 
@@ -442,13 +412,12 @@
                     const startOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay());
                     startDate = startOfWeek.toISOString().split('T')[0];
                     endDate = today.toISOString().split('T')[0];
-
                     // Update the input fields with default values
                     startDateInput.value = startDate;
                     endDateInput.value = endDate;
                 }
 
-                let url = `/test/daily?startDate=${startDate}&endDate=${endDate}`;
+                let url = `/posts/daily?startDate=${startDate}&endDate=${endDate}`;
                 let dailyStats = await fetch(url).then(response => response.json());
 
                 // Parse data for Chart.js
@@ -466,7 +435,7 @@
                 destroyChart('dailyChart');
 
                 // Draw charts
-                drawChart('dailyChart', 'Daily Reports', parsedDailyStats, true);
+                drawChart('dailyChart', 'Bài đăng được duyệt', parsedDailyStats, true);
             } catch (error) {
                 console.log("Error fetching and drawing charts:", error);
             }
