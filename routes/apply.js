@@ -40,6 +40,19 @@ router.post('/listMyApplied', async function (req, res, next) {
     data.reverse();
     res.json(data);
 });
+// update status accept
+router.post('/updateAcceptForUser', async function (req, res, next) {
+    let { receiver_id, id, sender_id, post_id, cv_id, salary } = req.body;
+    let category = 1;
+    let seen = 0;
+    try {
+        let data = await applyController.updateAccept(id);
+        await notificationController.insert(receiver_id, sender_id, post_id, cv_id, category, seen);
+        res.json(data);
+    } catch (error) {
+        console.log(error);
+    }
+});
 //---------------------------- Employee -----------------------------------//
 
 //get applited theo employers
