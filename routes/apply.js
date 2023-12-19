@@ -7,9 +7,6 @@ const cvModules = require('../modules/cv');
 
 //get all
 router.get('/list', async function (req, res, next) {
-    const user = "655b3b0e806637ac5b292b4c";
-    const apply = [];
-
     var data = await applyModules.find().populate('post_id').populate('cv');
     for (var i = 0; i < data.length; i++) {
         if (data[i].post_id.users_id == user) {
@@ -19,17 +16,27 @@ router.get('/list', async function (req, res, next) {
     }
     res.json({ message: "Lấy danh sách thành công", apply });
 });
-
+// Get all real
+router.get('/listAll', async function (req, res, next) {
+    var data = await applyModules.find();
+    res.json(data);
+});
+// Get all accept
+router.get('/listAllAccept', async function (req, res, next) {
+    var data = await applyModules.find({ status: 3 });
+    res.json(data);
+});
 
 //--------------------------------------APP-----------------------------------------
 //add new 
 router.post('/add', async function (req, res, next) {
     let { receiver_id, sender_id, post_id, cv_id, salary } = req.body;
     let category = 0;
+    let seen = 0;
     try {
-        await applyController.insert(sender_id, receiver_id, post_id, cv_id, salary);
-
-        await notificationController.insert(receiver_id, sender_id, post_id, cv_id, category);
+        let data = await applyController.insert(sender_id, receiver_id, post_id, cv_id, salary);
+        let Data = await notificationController.insert(receiver_id, sender_id, post_id, cv_id, category, seen);
+        res.json({ data, Data });
     } catch (error) {
         console.log(error);
     }
@@ -85,11 +92,12 @@ router.post('/update', async function (req, res, next) {
 });
 // update status accept
 router.post('/updateAccept', async function (req, res, next) {
-    let { receiver_id, sender_id, post_id, cv_id, salary } = req.body;
+    let { receiver_id, id, sender_id, post_id, cv_id, salary } = req.body;
     let category = 1;
+    let seen = 0;
     try {
-        let data = await applyController.updateAccept(req.body.id);
-        await notificationController.insert(receiver_id, sender_id, post_id, cv_id, category);
+        let data = await applyController.updateAccept(id);
+        await notificationController.insert(receiver_id, sender_id, post_id, cv_id, category, seen);
         res.json(data);
     } catch (error) {
         console.log(error);
@@ -98,10 +106,12 @@ router.post('/updateAccept', async function (req, res, next) {
 
 // update status reject
 router.post('/updateReject', async function (req, res, next) {
-    let { receiver_id, sender_id, post_id, cv_id, salary } = req.body;
+    let { receiver_id, id, sender_id, post_id, cv_id, } = req.body;
     let category = 1;
+    let seen = 0;
     try {
         let data = await applyController.updateReject(req.body);
+        await notificationController.insert(receiver_id, sender_id, post_id, cv_id, category, seen);
         res.json(data);
     } catch (error) {
         console.log(error);
@@ -109,10 +119,13 @@ router.post('/updateReject', async function (req, res, next) {
 });
 // update status bargain
 router.post('/updateBargain', async function (req, res, next) {
-    let { receiver_id, sender_id, post_id, cv_id, salary } = req.body;
+    let { receiver_id, id, bargain_salary, sender_id, post_id, cv_id, } = req.body;
+    console.log("ok : ", post_id, sender_id);
     let category = 2;
+    let seen = 0;
     try {
         let data = await applyController.updateBargain(req.body);
+        await notificationController.insert(receiver_id, sender_id, post_id, cv_id, category, seen);
         res.json(data);
     } catch (error) {
         console.log(error);
@@ -121,28 +134,25 @@ router.post('/updateBargain', async function (req, res, next) {
 //Lấy danh sách hồ sơ ứng tuyển chưa đọc
 router.post('/UnRead', async function (req, res, next) {
     var data = await applyModules.find({ receiver_id: req.body.id, status: 0 });
-  
     data.reverse();
     res.json(data);
 });
 //Lấy danh sách hồ sơ ứng tuyển đã đọc
 router.post('/Pending', async function (req, res, next) {
     var data = await applyModules.find({ receiver_id: req.body.id, status: 1 });
-   
     data.reverse();
     res.json(data);
 });
 //Lấy danh sách hồ sơ ứng tuyển đã bị từ chối
 router.post('/Reject', async function (req, res, next) {
     var data = await applyModules.find({ receiver_id: req.body.id, status: 2 });
-   
+
     data.reverse();
     res.json(data);
 });
 //Lấy danh sách hồ sơ ứng tuyển đã được duyệt
 router.post('/Accept', async function (req, res, next) {
     var data = await applyModules.find({ receiver_id: req.body.id, status: 3 });
-   
     data.reverse();
     res.json(data);
 });
@@ -152,6 +162,5 @@ router.post('/Bargain', async function (req, res, next) {
     data.reverse();
     res.json(data);
 });
-
 
 module.exports = router;

@@ -13,6 +13,7 @@ exports.insert = async (sender_id, receiver_id, post_id, cv_id, salary) => {
             feedback: '',
         });
         await data.save();
+        return data;
     } catch (error) {
         console.log(error);
     }
