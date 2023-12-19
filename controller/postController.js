@@ -155,10 +155,10 @@ exports.filter = async (key) => {
             }
         } else {
             if (key?.filter?.wageMin) {
-                filter.wageMin = { $gte: parseInt(key.filter.wageMin) * 100000 };
+                filter.wageMin = { $gte: parseInt(key.filter.wageMin) * 1000000 };
             }
             if (key?.filter?.wageMax) {
-                filter.wageMax = { $lte: parseInt(key.filter.wageMax) * 100000 };
+                filter.wageMax = { $lte: parseInt(key.filter.wageMax) * 1000000 };
             }
         }
         if (key?.filter?.academic_id) {
@@ -167,6 +167,7 @@ exports.filter = async (key) => {
         if (key?.filter?.experience_id) {
             filter.experience_id = { $regex: key.filter.experience_id };
         }
+        console.log(filter);
         let data = await postModel.find(filter);
         return data;
     } catch (error) {
