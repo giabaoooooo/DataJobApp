@@ -31,7 +31,16 @@
                     <a href="#" class="nav-link">Trang chủ</a>
                 </li>
 
+
+
             </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="admin" class="btn btn-danger">Đăng xuất</a>
+                </li>
+            </ul>
+
+
         </nav>
         <!-- /.navbar -->
 
@@ -128,51 +137,51 @@
             </div>
             <!-- /.content-header -->
 
-        <!-- /.card -->
-        {{!-- TK --}}
-        <div class="card">
-            <div class="card-header border-0">
-                <h3 class="card-title">Daily Statistics</h3>
-                <div class="card-tools">
-                    <form id="dateRangeForm">
-                        <label for="startDate">Start Date:</label>
-                        <input type="date" id="startDate" name="startDate" required>
+            <!-- /.card -->
+            {{!-- TK --}}
+            <div class="card">
+                <div class="card-header border-0">
+                    <h3 class="card-title">Daily Statistics</h3>
+                    <div class="card-tools">
+                        <form id="dateRangeForm">
+                            <label for="startDate">Start Date:</label>
+                            <input type="date" id="startDate" name="startDate" required>
 
-                        <label for="endDate">End Date:</label>
-                        <input type="date" id="endDate" name="endDate" required>
+                            <label for="endDate">End Date:</label>
+                            <input type="date" id="endDate" name="endDate" required>
 
-                        <button type="button" onclick="fetchAndDrawStats()">Filter</button>
-
-
+                            <button type="button" onclick="fetchAndDrawStats()">Filter</button>
 
 
-                        <div class="card-body">
-                            <div class="table-responsive">
 
-                                <table id="example1" class="table table-bordered table-striped">
-                                   
-                                </table>
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+
+                                    <table id="example1" class="table table-bordered table-striped">
+
+                                    </table>
+                                </div>
+
                             </div>
 
-                        </div>
 
 
 
 
 
+                        </form>
+                    </div>
+                </div>
 
-                    </form>
+                <div class="card-body">
+
+                    <canvas id="dailyChart" height="225" width="760"></canvas>
+
                 </div>
             </div>
-
-            <div class="card-body">
-
-                <canvas id="dailyChart" height="225" width="760"></canvas>
-
-            </div>
         </div>
-    </div>
-    <!-- /.col-md-6 -->
+        <!-- /.col-md-6 -->
     </div>
     <!-- /.row -->
     </div>
