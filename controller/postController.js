@@ -1,4 +1,5 @@
 const postModel = require('../modules/post');
+const moment = require('moment-timezone');
 
 exports.insert = async function insert(users_id, businessName, address, image, title, quantity, gender, career_id, workType_id, payForm_id, wageMin, wageMax, describe, ageMin, ageMax, academic_id, experience_id, status_id) {
     try {
@@ -98,7 +99,8 @@ exports.getSuggestion = async (data) => {
         const posts = [];
         if (data && data.length > 0) {
             for (const career of data) {
-                const foundPosts = await postModel.find({ career_id: career, status_id: '65447e2296c02dcf49965471' }).populate('users_id').populate('career_id').populate('payForm_id').populate('experience_id').populate('academic_id').populate('workType_id').populate('status_id');
+                const foundPosts = await postModel.find({ career_id: career, status_id: '65447e2296c02dcf49965471' })
+                    .populate('users_id').populate('career_id').populate('payForm_id').populate('experience_id').populate('academic_id').populate('workType_id').populate('status_id');
                 posts.push(...foundPosts);
             }
         }
@@ -119,7 +121,7 @@ exports.searchByKey = async (key) => {
                     { address: { $regex: key } },
                     { businessName: { $regex: key } },
                 ]
-            });
+            }).populate('users_id').populate('career_id').populate('payForm_id').populate('experience_id').populate('academic_id').populate('workType_id').populate('status_id');
             return posts;
         }
         return [];
@@ -172,4 +174,35 @@ exports.filter = async (key) => {
         return [];
     }
 }
+
+exports.getDailyStats = async (startDate, endDate) => {
+    try {
+        let data = await postModel.find({ status_id: "65447e2296c02dcf49965471"})
+        let matchQuery = { date: {}, status_id: "65447e2296c02dcf49965471" };
+        if (startDate) {
+            matchQuery.date.$gte = moment(startDate).startOf('day').toDate();
+        }
+        if (endDate) {
+            matchQuery.date.$lte = moment(endDate).endOf('day').toDate();
+        }
+        let dailyStats = await postModel.aggregate([
+            {
+                $match: matchQuery
+            },
+            {
+                $group: {
+                    _id: { $dateToString: { format: "%Y-%m-%d", date: "$date", timezone: "Asia/Ho_Chi_Minh" } },
+                    count: { $sum: 1 }
+                }
+            },
+            {
+                $sort: { _id: 1 }
+            }
+        ]);
+        return dailyStats.map(entry => ({ ...entry, _id: moment(entry._id).format("YYYY-MM-DD") }));
+    } catch (error) {
+        console.log("Lỗi trong getDailyStats():", error);
+    }
+}
+
 
