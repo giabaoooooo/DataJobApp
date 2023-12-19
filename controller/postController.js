@@ -51,7 +51,6 @@ exports.changeStatus = async (_id, status) => {
             date: currentDate.toISOString().slice(0, 10),
             time: currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds(),
         };
-        console.log(updatedData.time);
         await postModel.findByIdAndUpdate(_id, updatedData);
     } catch (error) {
         console.log(error);
@@ -168,7 +167,7 @@ exports.filter = async (key) => {
             filter.experience_id = { $regex: key.filter.experience_id };
         }
         console.log(filter);
-        let data = await postModel.find(filter);
+        let data = await postModel.find(filter).populate('users_id').populate('career_id').populate('payForm_id').populate('experience_id').populate('academic_id').populate('workType_id').populate('status_id');
         return data;
     } catch (error) {
         console.log(error);

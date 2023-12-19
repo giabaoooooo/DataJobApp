@@ -3,15 +3,16 @@ const applyModel = require('../modules/apply');
 exports.insert = async (sender_id, receiver_id, post_id, cv_id, salary) => {
     try {
         const data = new applyModel({
-            user_id : sender_id,
+            user_id: sender_id,
             receiver_id: receiver_id,
-            post_id : post_id,
-            cv_id : cv_id,
-            status : 0,
+            post_id: post_id,
+            cv_id: cv_id,
+            status: 0,
             salary: salary,
             bargain_salary: 0,
             feedback: '',
         });
+        data.salary = Number(salary.replace(/\./g, ''));
         await data.save();
         return data;
     } catch (error) {
@@ -21,9 +22,9 @@ exports.insert = async (sender_id, receiver_id, post_id, cv_id, salary) => {
 
 exports.update = async (id) => {
     try {
-        const data = await applyModel.findOneAndUpdate( 
-             { _id: id }, {
-             status: 1 ,
+        const data = await applyModel.findOneAndUpdate(
+            { _id: id }, {
+            status: 1,
         });
         return data;
     } catch (error) {
@@ -56,10 +57,12 @@ exports.updateReject = async (id) => {
 
 exports.updateBargain = async (id) => {
     try {
+        const temp = id?.bargain_salary;
+        const bargain = Number(temp.replace(/\./g, ''));
         const data = await applyModel.findOneAndUpdate(
             { _id: id?.id }, {
             status: 4,
-            bargain_salary: id?.bargain_salary,
+            bargain_salary: bargain,
         });
         return data;
     } catch (error) {

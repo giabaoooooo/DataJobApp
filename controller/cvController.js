@@ -12,13 +12,12 @@ exports.insert = async (title, user_id, career_id, name, phone, year, email, add
 
 exports.getMyCV = async (id) => {
     try {
-        var data = await cvModules.find({ user_id: id?.id }).populate('academic_id').populate('experience_id').populate('gender_id').populate('career_id').populate('user_id');
+        var data = await cvModules.find({ user_id: id?.id, career_id: id?.c_id }).populate('academic_id').populate('experience_id').populate('gender_id').populate('career_id').populate('user_id');
         return data;
     } catch (error) {
         console.log(error);
     }
 }
-
 
 exports.getMyCVByCareer = async (id) => {
     try {
@@ -31,7 +30,7 @@ exports.getMyCVByCareer = async (id) => {
 
 exports.first = async (id) => {
     try {
-        var data = await cvModules.find({ user_id: id }).populate('academic_id').populate('user_id');
+        var data = await cvModules.find({ user_id: id }).populate('academic_id').populate('experience_id').populate('gender_id').populate('career_id').populate('user_id');
         return data;
     } catch (error) {
         console.log(error);
