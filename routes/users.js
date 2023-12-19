@@ -96,34 +96,43 @@ router.post('/login', async function (req, res, next) {
   }
 });
 router.get('/', async (req, res, next) => {
-
   try {
-      let users = await userController.getAll();
-      users = users.map((el, index) => {
-          return {
-              _id: el._id,
-              
-              email: el.email,
-              displayName: el.displayName,
-              phone:el.phone,
-              index: index + 1,
-          }
-      });
-      res.render('userList', { us: users });
-      console.log(users);
+    let users = await userController.getAll();
+    users = users.map((el, index) => {
+      if (el.role == 1) {
+        return {
+          _id: el._id,
+          role: 'Nhà tuyển dụng',
+          email: el.email,
+          displayName: el.displayName,
+          phone: el.phone,
+          index: index + 1,
+        }
+      } else {
+        return {
+          _id: el._id,
+          role: 'Người dùng',
+          email: el.email,
+          displayName: el.displayName,
+          phone: el.phone,
+          index: index + 1,
+        }
+      }
+    });
+    res.render('userList', { us: users }); 
   } catch (error) {
-      console.log("Error in getAll():", error);
+    console.log("Error in getAll():", error);
   }
 });
 router.post('/check', async (req, res, next) => {
   try {
-      let { id } = req.body;
-      let users = await userController.check(id);
+    let { id } = req.body;
+    let users = await userController.check(id);
 
-      res.send(users);
-      console.log(users);
+    res.send(users);
+    console.log(users);
   } catch (error) {
-      console.log("Error in getAll():", error);
+    console.log("Error in getAll():", error);
   }
 });
 
