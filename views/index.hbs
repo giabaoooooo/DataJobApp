@@ -7,8 +7,7 @@
     <title>Admin | Home</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="fontawesome-free/css/all.min.css">
     <!-- IonIcons -->
@@ -30,7 +29,7 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Trang chủ</a>
                 </li>
-               
+
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -39,8 +38,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
-                <img src="img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
+                <img src="img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Admin</span>
             </a>
 
@@ -59,8 +57,7 @@
                 <!-- SidebarSearch Form -->
                 <div class="form-inline">
                     <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Tìm kiếm"
-                            aria-label="Search">
+                        <input class="form-control form-control-sidebar" type="search" placeholder="Tìm kiếm" aria-label="Search">
                         <div class="input-group-append">
                             <button class="btn btn-sidebar">
                                 <i class="fas fa-search fa-fw"></i>
@@ -71,8 +68,7 @@
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
@@ -124,7 +120,7 @@
                         <div class="col-sm-6">
                             <h1 class="m-0">Trang chủ</h1>
                         </div><!-- /.col -->
-                        
+
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -199,8 +195,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <img src="img/default-150x150.png" alt="Product 1"
-                                                        class="img-circle img-size-32 mr-2">
+                                                    <img src="img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
                                                     Some Product
                                                 </td>
                                                 <td>$13 USD</td>
@@ -219,8 +214,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <img src="img/default-150x150.png" alt="Product 1"
-                                                        class="img-circle img-size-32 mr-2">
+                                                    <img src="img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
                                                     Another Product
                                                 </td>
                                                 <td>$29 USD</td>
@@ -239,8 +233,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <img src="img/default-150x150.png" alt="Product 1"
-                                                        class="img-circle img-size-32 mr-2">
+                                                    <img src="img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
                                                     Amazing Product
                                                 </td>
                                                 <td>$1,230 USD</td>
@@ -259,8 +252,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <img src="img/default-150x150.png" alt="Product 1"
-                                                        class="img-circle img-size-32 mr-2">
+                                                    <img src="img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
                                                     Perfect Item
                                                     <span class="badge bg-danger">NEW</span>
                                                 </td>
@@ -328,57 +320,60 @@
                             <div class="card">
                                 <div class="card-header border-0">
                                     <h3 class="card-title">Daily Statistics</h3>
-                                    <div class="card-tools">
+                                    <div class="card-title">
                                         <form id="dateRangeForm">
                                             <label for="startDate">Start Date:</label>
                                             <input type="date" id="startDate" name="startDate" required>
-                            
+
                                             <label for="endDate">End Date:</label>
                                             <input type="date" id="endDate" name="endDate" required>
-                            
+
                                             <button type="button" onclick="fetchAndDrawStats()">Filter</button>
-                                            
+                                        </form>
+                                        
 
 
-
-                                             <div class="card-body">
-                                <div class="table-responsive">
-
-                                    <table id="example1" class="table table-bordered table-striped">
+                                    <div class="card-body table-responsive p-0">
+                                    <table class="table table-striped table-valign-middle">
                                         <thead>
                                             <tr>
-                                                <th>Tiêu Đề</th>
-                                               
-                                               
+                                                <th>Tiêu đề</th>
+                                                <th>Thơi gian đăng</th>
+                                                <th>More</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {{#each posts}}
+                                            
                                             <tr>
-                                                <td>{{this.title}}</td>
-                                                
-                                               
+                                                <td>
+                                                    Another Product
+                                                </td>
+                                                <td>$29 USD</td>
+                                                <td>
+                                                    <a href="#" class="text-muted">
+                                                        <i class="fas fa-search"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
-                                            {{/each}}
+                                        
                                         </tbody>
                                     </table>
                                 </div>
 
-                            </div>
-                                        
 
 
 
 
 
-                                        </form>
+
+
                                     </div>
                                 </div>
-                            
+
                                 <div class="card-body">
-                            
+
                                     <canvas id="dailyChart" height="225" width="760"></canvas>
-                            
+
                                 </div>
                             </div>
                         </div>
@@ -399,7 +394,7 @@
         <!-- /.control-sidebar -->
 
         <!-- Main Footer -->
-       
+
     </div>
     <!-- ./wrapper -->
 
