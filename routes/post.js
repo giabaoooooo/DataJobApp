@@ -51,6 +51,7 @@ router.get('/post-allow', async function (req, res, next) {
         console.error(error);
     }
 });
+
 //lấy thông tin chi tiết post
 router.get('/detail', async function (req, res, next) {
     var id = req.query.id;
