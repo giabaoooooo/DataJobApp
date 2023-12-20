@@ -177,7 +177,7 @@ exports.filter = async (key) => {
 
 exports.getDailyStats = async (startDate, endDate) => {
     try {
-        let data = await postModel.find({ status_id: "65447e2296c02dcf49965471"})
+        //let data = await postModel.find({ status_id: "65447e2296c02dcf49965471"})
         let matchQuery = { date: {}, status_id: "65447e2296c02dcf49965471" };
         if (startDate) {
             matchQuery.date.$gte = moment(startDate).startOf('day').toDate();

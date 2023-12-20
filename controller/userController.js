@@ -69,9 +69,9 @@ async function checkGoogleID(token) {
 };
 // Check Phone Number
 async function checkPhoneNumber(phone) {
-    console.log("ok : ",phone);
+    const Phone = phone.slice(1,10);
     try {
-        const existingUser = await User.findOne({ phone: phone });
+        const existingUser = await User.findOne({ phone: Phone });
         if (existingUser) {
             return existingUser;
         } else {

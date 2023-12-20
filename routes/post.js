@@ -173,11 +173,10 @@ router.post('/delete', async (req, res, next) => {
     try {
         const data = await postModel.find({ _id: id });
         const test = [data];
-        if (test.status_id === "65423efa3f8e779b5ec14e51") {
+        console.log(test);
+        if (test) {
             const tempData = await postModel.deleteOne({ _id : id });
             res.json(tempData);
-        } else {
-            
         } 
     } catch (error) {
         console.log(error);
