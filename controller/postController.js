@@ -51,7 +51,6 @@ exports.changeStatus = async (_id, status) => {
             date: currentDate.toISOString().slice(0, 10),
             time: currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds(),
         };
-        console.log(updatedData.time);
         await postModel.findByIdAndUpdate(_id, updatedData);
     } catch (error) {
         console.log(error);
@@ -155,10 +154,10 @@ exports.filter = async (key) => {
             }
         } else {
             if (key?.filter?.wageMin) {
-                filter.wageMin = { $gte: parseInt(key.filter.wageMin) * 100000 };
+                filter.wageMin = { $gte: parseInt(key.filter.wageMin) * 1000000 };
             }
             if (key?.filter?.wageMax) {
-                filter.wageMax = { $lte: parseInt(key.filter.wageMax) * 100000 };
+                filter.wageMax = { $lte: parseInt(key.filter.wageMax) * 1000000 };
             }
         }
         if (key?.filter?.academic_id) {
@@ -167,7 +166,8 @@ exports.filter = async (key) => {
         if (key?.filter?.experience_id) {
             filter.experience_id = { $regex: key.filter.experience_id };
         }
-        let data = await postModel.find(filter);
+        console.log(filter);
+        let data = await postModel.find(filter).populate('users_id').populate('career_id').populate('payForm_id').populate('experience_id').populate('academic_id').populate('workType_id').populate('status_id');
         return data;
     } catch (error) {
         console.log(error);

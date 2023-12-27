@@ -16,7 +16,8 @@ router.post('/new', async function (req, res, next) {
 
 //lấy danh sách theo users_id
 router.post('/myCVs', async function (req, res, next) {
-    let data = await cvController.getMyCV(req.body);
+    let data = await cvController.getMyCV(req.body.tempData);
+    data.reverse();
     res.json(data);
 });
 
@@ -29,6 +30,7 @@ router.post('/myCVsByCareer', async function (req, res, next) {
 //lấy cv mới theo users_id
 router.post('/first', async function (req, res, next) {
     let data = await cvController.first(req.body.id);
+    data.reverse();
     res.json(data);
 });
 // Update Cv

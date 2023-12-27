@@ -7,9 +7,6 @@ const cvModules = require('../modules/cv');
 
 //get all
 router.get('/list', async function (req, res, next) {
-    const user = "655b3b0e806637ac5b292b4c";
-    const apply = [];
-
     var data = await applyModules.find().populate('post_id').populate('cv');
     for (var i = 0; i < data.length; i++) {
         if (data[i].post_id.users_id == user) {
@@ -19,7 +16,16 @@ router.get('/list', async function (req, res, next) {
     }
     res.json({ message: "Lấy danh sách thành công", apply });
 });
-
+// Get all real
+router.get('/listAll', async function (req, res, next) {
+    var data = await applyModules.find();
+    res.json(data);
+});
+// Get all accept
+router.get('/listAllAccept', async function (req, res, next) {
+    var data = await applyModules.find({ status: 3 });
+    res.json(data);
+});
 
 //--------------------------------------APP-----------------------------------------
 //add new 
@@ -100,7 +106,7 @@ router.post('/updateAccept', async function (req, res, next) {
 
 // update status reject
 router.post('/updateReject', async function (req, res, next) {
-    let { receiver_id, id, sender_id, post_id, cv_id,  } = req.body;
+    let { receiver_id, id, sender_id, post_id, cv_id, } = req.body;
     let category = 1;
     let seen = 0;
     try {
