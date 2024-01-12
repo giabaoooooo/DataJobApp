@@ -30,12 +30,12 @@ router.get('/listAllAccept', async function (req, res, next) {
 //--------------------------------------APP-----------------------------------------
 //add new 
 router.post('/add', async function (req, res, next) {
-    let { receiver_id, sender_id, post_id, cv_id, salary } = req.body;
+    let { receiver_id, sender_id, post_id, cv_id, salary, messagingToken } = req.body;
     let category = 0;
     let seen = 0;
     try {
         let data = await applyController.insert(sender_id, receiver_id, post_id, cv_id, salary);
-        let Data = await notificationController.insert(receiver_id, sender_id, post_id, cv_id, category, seen);
+        let Data = await notificationController.insert(receiver_id, sender_id, post_id, cv_id, category, seen, messagingToken);
         res.json({ data, Data });
     } catch (error) {
         console.log(error);

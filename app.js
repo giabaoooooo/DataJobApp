@@ -28,6 +28,8 @@ var applyRouter = require('./routes/apply');
 var adminRouter = require('./routes/admins');
 var notificationRouter = require('./routes/notifications');
 
+
+
 //connect to MongoDB
 var mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://sakuraimusic123:Datn2023@linksdaily.pfhz3ry.mongodb.net/jobapp', {
