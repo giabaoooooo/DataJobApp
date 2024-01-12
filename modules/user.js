@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 const user = new Schema({
     //_id: ObjectId,
+    messagingToken: {
+        type: String,
+        required: true,
+    },
     googleId: {
         type: String,
         required: true,
@@ -29,19 +33,19 @@ const user = new Schema({
     },
     birthDay: {
         type: String,
-        required: true,
+
     },
     address: {
         type: String,
-        required: true,
+
     },
     phone: {
         type: Number,
-        required: true,
+     
     },
     gender: {
         type: String,
-        required: true,
+ 
     },
     role: {
         type: Number,

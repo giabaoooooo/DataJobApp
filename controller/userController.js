@@ -32,7 +32,7 @@ async function checkFaceBookID(user) {
 async function checkGoogleID(token) {
     try {
         const ticket = await client.verifyIdToken({
-            idToken: token,
+            idToken: token.token,
             audience: '598708373288-vlbap93edc5r144q7cnealcu8vls110o.apps.googleusercontent.com',
         });
         const payload = ticket.getPayload();
@@ -43,12 +43,15 @@ async function checkGoogleID(token) {
         const name = payload['name'];
         const picture = payload['picture'];
 
-        const existingUser = await User.findOne({ googleId: userId });
+        const existingUser = await User.findOneAndUpdate(
+            { googleId: userId }, { messagingToken: token.messagingToken });
 
         if (existingUser) {
             return existingUser;
+
         } else {
             const data = {
+                messagingToken: token.messagingToken,
                 googleId: userId,
                 displayName: name,
                 email: email,
@@ -102,6 +105,7 @@ async function facebookSignIn(users) {
             return existingUser;
         } else {
             const data = new User({
+                messagingToken: users?.inputs?.messagingToken,
                 googleId: "null",
                 facebookId: users?.inputs?.facebookId,
                 messagingToken: users?.inputs?.messagingToken,
@@ -126,24 +130,24 @@ async function facebookSignIn(users) {
 // SignIn with Google
 async function googleSignIn(token) {
     try {
-        const existingUser = await User.findOne({ googleId: token?.inputs?.googleId });
+        const existingUser = await User.findOne({ googleId: token?.data?.googleId });
 
         if (existingUser) {
             return existingUser;
         } else {
             const data = new User({
-                googleId: token?.inputs?.googleId,
+                messagingToken: token?.data?.messagingToken,
+                googleId: token?.data?.googleId,
                 facebookId: "null",
-                messagingToken: token?.inputs?.messagingToken,
-                displayName: token?.inputs?.displayName,
-                email: token?.inputs?.email,
-                photo: token?.inputs?.photo,
-                birthDay: token?.inputs?.birthDay,
-                address: token?.inputs?.address,
-                phone: token?.inputs?.phone,
-                gender: token?.inputs?.gender,
-                role: token?.inputs?.role,
-                favoriteCareers: token?.inputs?.favoriteCareers,
+                displayName: token?.data?.displayName,
+                email: token?.data?.email,
+                photo: token?.data?.photo,
+                birthDay: token?.data?.birthDay,
+                address: token?.data?.address,
+                phone: token?.data?.phone,
+                gender: token?.data?.gender,
+                role: token?.data?.role,
+                favoriteCareers: token?.data?.favoriteCareers,
                 status: true,
             });
             await data.save();
@@ -162,7 +166,8 @@ async function phoneNumberSignIn(token) {
             return existingUser;
         } else {
             const data = new User({
-                googleId: "null",
+                messagingToken: token?.inputs?.messagingToken,
+                googleId: token?.inputs?.googleId,
                 facebookId: "null",
                 messagingToken: token?.inputs?.messagingToken, 
                 displayName: token?.inputs?.displayName,

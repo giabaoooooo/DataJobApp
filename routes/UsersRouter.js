@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 var express = require('express');
 var router = express.Router();
 const user = require('../modules/user');
-let UserController = require('../controller/UserController');
+let UserController = require('../controller/userController');
 
 //get layout login
 // router.get('/', function (req, res, next) {
@@ -21,9 +21,10 @@ router.post('/FaceBookCheck', async function (req, res) {
 });
 // Check tài khoản google
 router.post('/GoogleCheck', async function (req, res) {
-  var token = req.body.idtoken;
+  var token = req.body;
   const user = await UserController.checkGoogleID(token);
   res.send(user);
+  
 });
 // Check số điện thoại
 router.post('/NumberPhoneCheck', async function (req, res) {
