@@ -104,6 +104,7 @@ async function facebookSignIn(users) {
             const data = new User({
                 googleId: "null",
                 facebookId: users?.inputs?.facebookId,
+                messagingToken: users?.inputs?.messagingToken,
                 displayName: users?.inputs?.displayName,
                 email: users?.inputs?.email,
                 photo: users?.inputs?.photo,
@@ -133,6 +134,7 @@ async function googleSignIn(token) {
             const data = new User({
                 googleId: token?.inputs?.googleId,
                 facebookId: "null",
+                messagingToken: token?.inputs?.messagingToken,
                 displayName: token?.inputs?.displayName,
                 email: token?.inputs?.email,
                 photo: token?.inputs?.photo,
@@ -160,8 +162,9 @@ async function phoneNumberSignIn(token) {
             return existingUser;
         } else {
             const data = new User({
-                googleId: token?.inputs?.googleId,
+                googleId: "null",
                 facebookId: "null",
+                messagingToken: token?.inputs?.messagingToken, 
                 displayName: token?.inputs?.displayName,
                 email: token?.inputs?.email,
                 photo: token?.inputs?.photo,

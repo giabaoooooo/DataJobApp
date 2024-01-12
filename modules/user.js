@@ -11,6 +11,10 @@ const user = new Schema({
         type: String,
         required: true,
     },
+    messagingToken: {
+        type: String,
+        required: true,
+    },
     displayName: {
         type: String,
         required: true,
