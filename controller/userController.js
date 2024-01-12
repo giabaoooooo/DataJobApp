@@ -187,4 +187,15 @@ async function phoneNumberSignIn(token) {
     }
 }
 
-module.exports = { checkGoogleID, checkPhoneNumber, googleSignIn, phoneNumberSignIn, checkFaceBookID, facebookSignIn };
+async function updateToken(data) {
+    try {
+        const update = await User.findIdAndUpdate(
+                {_id: data?.tempData.id},
+                {messagingToken: data?.tempData.messagingToken}
+            );
+            return update;
+    } catch (error) {
+        console.log("error: ", error);
+    }
+}
+module.exports = { checkGoogleID, checkPhoneNumber, googleSignIn, phoneNumberSignIn, checkFaceBookID, facebookSignIn, updateToken };

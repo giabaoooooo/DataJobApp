@@ -1,6 +1,6 @@
 const notificationModel = require('../modules/notification');
 const userModel = require('../modules/user');
-const http = require('http');
+const http = require('https');
 
 var admin = require("firebase-admin");
 
@@ -59,7 +59,10 @@ const sendNotification = async (data) => {
     // }
     const id = data.receiver_id; 
     try {
-        const result = await userModel.find({ _id: id }); 
+        const result = await userModel.find({ _id: id }).populate('user_id'); 
+        console.log("result: ", result);
+        
+
         const messagingToken = result.messagingToken;
         const data = JSON.stringify({
             "registration_ids": [
