@@ -47,5 +47,9 @@ router.post('/PhoneNumberSignIn', async function (req, res) {
   const user = await UserController.phoneNumberSignIn(req.body);
   res.send(user);
 });
-
+// Update messagingToken
+router.post('/UpdateToken', async function(req, res) {
+  const user = await UserController.updateToken(req.body);
+  res.send(user);
+})
 module.exports = router;
