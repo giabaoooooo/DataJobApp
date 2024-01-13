@@ -191,7 +191,7 @@ async function phoneNumberSignIn(token) {
 
 async function updateToken(data) {
     try {
-        const update = await User.findIdAndUpdate(
+        const update = await User.findOneAndUpdate(
                 {_id: data?.tempData.id},
                 {messagingToken: data?.tempData.messagingToken}
             );

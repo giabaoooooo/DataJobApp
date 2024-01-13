@@ -59,14 +59,10 @@ const sendNotification = async (data) => {
     // }
     const id = data.receiver_id; 
     try {
-        const result = await userModel.find({ _id: id }).populate('user_id'); 
-        console.log("result: ", result);
-        
-
-        const messagingToken = result.messagingToken;
+        const result = await userModel.find({ _id: id }); 
         const data = JSON.stringify({
             "registration_ids": [
-                "eJVD_nLxTt-6VD0-feAPne:APA91bFn1oyHAU8Kr6aJj6iAnIhrHvOriAHh8nOXUhzCDpm2AfflqAvip7TJwM6tPLAyMN7Glk4Mm5acvFoDB9f1inQrhO8vCuNTwfXqJnXBijd1QuDPKs4j5l69pNAHI_duZHjO3Psk"
+                result.messagingToken,
             ],
             "notification": {
                 "title": "Thông báo",
