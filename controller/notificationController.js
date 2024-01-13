@@ -8,10 +8,10 @@ var serviceAccount = require("../part-time-job-e95a4-firebase-adminsdk-1oexn-f3f
 // const  firebase  = require('@react-native-firebase/messaging');
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+    credential: admin.credential.cert(serviceAccount)
 });
 
-exports.insert = async (receiver_id, sender_id, post_id, cv_id, category, seen, messagingToken) => {
+exports.insert = async (receiver_id, sender_id, post_id, cv_id, category, seen) => {
     try {
         const data = new notificationModel({
             receiver_id: receiver_id,
@@ -20,7 +20,6 @@ exports.insert = async (receiver_id, sender_id, post_id, cv_id, category, seen, 
             cv_id: cv_id,
             category: category,
             seen: seen,
-            messagingToken: messagingToken,
         });
         await data.save();
         sendNotification(data);
@@ -57,51 +56,132 @@ const sendNotification = async (data) => {
     //         console.log(msg);
     //     })
     // }
-    const id = data.receiver_id; 
+    const idReceiver = data.receiver_id;
+    const idSender = data.sender_id;
+    const category = data.category;
     try {
-        const result = await userModel.find({ _id: id }); 
-        const data = JSON.stringify({
+        const result = await userModel.find({ _id: idReceiver });
+        const dataSender = await userModel.find({ _id: idSender });
+        const messagingToken = result[0].messagingToken;
+
+        const data0 = JSON.stringify({
             "registration_ids": [
-                result.messagingToken,
+                messagingToken,
             ],
             "notification": {
-                "title": "Thông báo",
-                "body": "abc"
+                'body': dataSender[0].displayName + ' đã ứng tuyển tin của bạn',
+                'title': 'Đơn ứng tuyển mới',
+                'color': "#337BFF",
+                'priority': "high",
+                'sound': "default",
+                'vibrateTimingsMillis': [200, 500, 800],
+                'imageUrl': dataSender[0].photo,
+            },
+            "data": {
+                'category': category,
+                'role': result[0].role,
             }
         });
+
+        const data01 = JSON.stringify({
+            "registration_ids": [
+                messagingToken,
+            ],
+            "notification": {
+                'body': dataSender[0].displayName + ' đã phản hồi lại đơn ứng tuyển của bạn',
+                'title': 'Phản hồi từ nhà tuyển dụng',
+                'color': "#337BFF",
+                'priority': "high",
+                'sound': "default",
+                'vibrateTimingsMillis': [200, 500, 800],
+                'imageUrl': dataSender[0].photo,
+            },
+            "data": {
+                'category': category,
+                'role': result[0].role,
+            }
+        });
+
+        const data11 = JSON.stringify({
+            "registration_ids": [
+                messagingToken,
+            ],
+            "notification": {
+                'body': dataSender[0].displayName + ' đã phản hồi lại yêu cầu của bạn',
+                'title': 'Phản hồi từ ứng viên',
+                'color': "#337BFF",
+                'priority': "high",
+                'sound': "default",
+                'vibrateTimingsMillis': [200, 500, 800],
+                'imageUrl': dataSender[0].photo,
+            },
+            "data": {
+                'category': category,
+                'role': result[0].role,
+            }
+        });
+
+        const data2 = JSON.stringify({
+            "registration_ids": [
+                messagingToken,
+            ],
+            "notification": {
+                'body': dataSender[0].displayName + ' muốn thương lượng mức lương với bạn',
+                'title': 'Phản hồi từ nhà tuyển dụng',
+                'color': "#337BFF",
+                'priority': "high",
+                'sound': "default",
+                'vibrateTimingsMillis': [200, 500, 800],
+                'imageUrl': dataSender[0].photo,
+            },
+            "data": {
+                'category': category,
+                'role': result[0].role,
+            }
+        });
+
+
         const options = {
             hostname: 'fcm.googleapis.com',
             path: '/fcm/send',
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'key=AAAAi2XMxyg:APA91bH-FRApbC_AHFGwqjofdkWE2xKIFfHmwL7K93WuhP34Um8WjkfnD48BObq5oEmv7yL5mURLBTnFSAgrwKSkIulpDfoJYuDxmSBGUy2ucIKEzUp_3Vzh9f2bhayOgCFZpH5TvMUi' // Thêm khóa xác thực của bạn ở đây
+                'Content-Type': 'application/json',
+                'Authorization': 'key=AAAAi2XMxyg:APA91bH-FRApbC_AHFGwqjofdkWE2xKIFfHmwL7K93WuhP34Um8WjkfnD48BObq5oEmv7yL5mURLBTnFSAgrwKSkIulpDfoJYuDxmSBGUy2ucIKEzUp_3Vzh9f2bhayOgCFZpH5TvMUi' // Thêm khóa xác thực của bạn ở đây
             }
-          };
-          
-          const req = http.request(options, res => {
+        };
+
+        const req = http.request(options, res => {
             let responseData = '';
-          
+
             res.on('data', chunk => {
-              responseData += chunk;
+                responseData += chunk;
             });
-          
+
             res.on('end', () => {
-              console.log('Phản hồi từ server:', responseData);
+                console.log('Phản hồi từ server:', responseData);
             });
-          });
-          
-          req.on('error', error => {
+        });
+
+        req.on('error', error => {
             console.error('Lỗi khi gửi yêu cầu:', error);
-          });
-          
-          // Gửi dữ liệu trong yêu cầu
-          req.write(data);
-          req.end();
+        });
+
+        // Gửi dữ liệu trong yêu cầu
+        if (category == 0) {
+            req.write(data0);
+        } else if (category == 1 && result[0].role == 0) {
+            req.write(data01);
+        } else if (category == 1 && result[0].role == 1) {
+            req.write(data11);
+        } else {
+            req.write(data2);
+        }
+        req.end();
     } catch (error) {
         console.log(error);
     }
-    
+
 }
 
 exports.getById = async (_id) => {

@@ -8,10 +8,6 @@ const notificationSchema = new Schema({
         type: String,
         ref: 'user',
     },
-    messagingToken: {
-        type: String,
-        required: true,
-    },
     sender_id: {
         type: String,
         ref: 'user',
