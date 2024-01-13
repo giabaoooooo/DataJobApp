@@ -57,20 +57,24 @@ const sendNotification = async (data) => {
     //         console.log(msg);
     //     })
     // }
-    const id = data.receiver_id; 
+    const idReceiver = data.receiver_id; 
+    const idSender = data.sender_id;
     try {
-        const result = await userModel.find({ _id: id }).populate('user_id'); 
-        console.log("result: ", result);
-        
-
-        const messagingToken = result.messagingToken;
+        const result = await userModel.find({ _id: idReceiver }); 
+        const dataSender = await userModel.find({ _id: idSender });
+        const messagingToken = result[0].messagingToken;
         const data = JSON.stringify({
             "registration_ids": [
-                "eJVD_nLxTt-6VD0-feAPne:APA91bFn1oyHAU8Kr6aJj6iAnIhrHvOriAHh8nOXUhzCDpm2AfflqAvip7TJwM6tPLAyMN7Glk4Mm5acvFoDB9f1inQrhO8vCuNTwfXqJnXBijd1QuDPKs4j5l69pNAHI_duZHjO3Psk"
+                messagingToken,
             ],
             "notification": {
-                "title": "Thông báo",
-                "body": "abc"
+                'body': dataSender[0].displayName + ' đã ứng tuyển tin của bạn',
+                'title': 'Đơn ứng tuyển mới',
+                'color': "#337BFF",
+                'priority': "high",
+                'sound': "default",
+                'vibrateTimingsMillis': [200, 500, 800],
+                'imageUrl': dataSender[0].photo,
             }
         });
         const options = {
