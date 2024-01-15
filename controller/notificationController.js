@@ -170,7 +170,7 @@ const sendNotification = async (data) => {
         // Gửi dữ liệu trong yêu cầu
         if (category == 0) {
             req.write(data0);
-        } else if (category == 1 && result[0].role == 0) {
+         } else if (category == 1 && result[0].role == 0) {
             req.write(data01);
         } else if (category == 1 && result[0].role == 1) {
             req.write(data11);
