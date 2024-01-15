@@ -31,7 +31,7 @@ exports.getMyCVByCareer = async (id) => {
 
 exports.first = async (id) => {
     try {
-        var data = await cvModules.find({ user_id: id, career_id: '6554b9b322054e51b8327165' }).populate('academic_id').populate('user_id');
+        var data = await cvModules.find({ user_id: id }).populate('academic_id').populate('user_id');
         return data;
     } catch (error) {
         console.log(error);
