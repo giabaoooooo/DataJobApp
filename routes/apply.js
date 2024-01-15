@@ -4,6 +4,98 @@ const applyModules = require('../modules/apply');
 const applyController = require('../controller/applyController');
 const notificationController = require('../controller/notificationController');
 const cvModules = require('../modules/cv');
+const user = require('../modules/user');
+let UserController = require('../controller/userController');
+
+
+// Hàm lấy số lượng hồ sơ ứng tuyển của nhà tuyển dụng nhận được
+async function getApplyCount(employer) {
+    const ada = employer._id.toString();
+    const applyCount = await applyController.findByIdCondition(ada);
+    return applyCount.length;
+}
+// Hàm sắp xếp top nhà tuyển dụng 
+async function sortEmployerByApplyCount(employer) {
+    const results = await Promise.all(
+        employer.map(async (data) => {
+            const applyCount = await getApplyCount(data);
+            return {
+                employer: data,
+                applyCount: applyCount,
+            };
+        })
+    );
+
+    results.sort((a, b) => b.applyCount - a.applyCount);
+
+    return results.map((item) => ({
+        name: item.employer.displayName,
+        applyCount: item.applyCount,
+    }));
+}
+// Hàm lấy số lượng hồ sơ ứng tuyển của người dùng đã gửi
+async function getApplyCountByUser(user) {
+    const ada = user._id.toString();
+    const applyCount = await applyController.JobFindinguser(ada);
+    return applyCount.length;
+}
+//Hàm sắp xếp top người dùng có số lần ứng tuyển cao nhất
+async function sortUserByApplyAccept(user) {
+    const results = await Promise.all(
+        user.map(async (data) => {
+            const applyCount = await getApplyCountByUser(data);
+            return {
+                user: data,
+                applyCount: applyCount,
+            };
+        })
+    );
+
+    results.sort((a, b) => b.applyCount - a.applyCount);
+
+    return results.map((item) => ({
+        name: item.user.displayName,
+        applyCount: item.applyCount,
+    }));
+}
+// thông kê top nhà tuyển dụng
+router.get('/StaticTopEmployer', async function (req, res, next) {
+    const employer = await UserController.getEmployer();
+    const sortedEmployer = await sortEmployerByApplyCount(employer);
+    res.json(sortedEmployer);
+});
+
+//thống kê người dùng ứng tuyển thành công
+router.get('/JobFindinguser', async function (rep, res) {
+    try {
+        const users = await UserController.getUser();
+        const data = await sortUserByApplyAccept(users);
+        res.json(data);
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+router.get('/monthly', async (req, res) => {
+    try {
+        const year = req.query.year;
+        let monthlyStats = await applyController.getMonthlyStats(year);
+        console.log(monthlyStats);
+        res.json(monthlyStats);
+    } catch (error) {
+        console.log("Error in monthly stats route:", error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
+
+
+
+
+
+
+
 
 //get all
 router.get('/list', async function (req, res, next) {

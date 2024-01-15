@@ -2,6 +2,29 @@ const User = require('../modules/user');
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client('598708373288-vlbap93edc5r144q7cnealcu8vls110o.apps.googleusercontent.com')
 
+//lay danh sach người dùng
+async function getUser() {
+    try {
+        const data = await User.find({ role: 0 });
+        if (data) {
+            return data;
+        }
+    } catch (error) {
+        console.log("err :" + error);
+    }
+};
+//lay danh sach nha tuyen dung ra
+async function getEmployer(){
+    try{
+        const data = await User.find({role: 1});
+        if (data){
+            return data;
+        }
+    } catch (error) {
+        console.log("err :" + error);
+    }
+};
+
 // Check with FaceBook
 async function checkFaceBookID(user) {
     try {
@@ -200,4 +223,4 @@ async function updateToken(data) {
         console.log("error: ", error);
     }
 }
-module.exports = { checkGoogleID, checkPhoneNumber, googleSignIn, phoneNumberSignIn, checkFaceBookID, facebookSignIn, updateToken };
+module.exports = { checkGoogleID, checkPhoneNumber, googleSignIn, phoneNumberSignIn, checkFaceBookID, facebookSignIn, updateToken, getEmployer, getUser };

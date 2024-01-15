@@ -1,5 +1,8 @@
 const applyModel = require('../modules/apply');
 
+
+
+
 exports.insert = async (sender_id, receiver_id, post_id, cv_id, salary) => {
     try {
         const data = new applyModel({
@@ -111,5 +114,53 @@ exports.getByBargainStatus = async (id) => {
         return posts;
     } catch (error) {
         console.log(error);
+    }
+}
+
+exports.findByIdCondition = async (id) => {
+    try {
+        let data = await applyModel.find({ receiver_id: id });
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+exports.JobFindinguser = async (id) => {
+    try {
+        console.log("id : ",id);
+        let data = await applyModel.find({ user_id: id, status_id: 3 });
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.getMonthlyStats = async (year) => {
+    let numericYear = parseInt(year) + 1;
+    try {
+        let monthlyStats = await applyModel.aggregate([
+            {
+                $match: {
+                    date: {
+                        $gte: new Date(year, 0, 1),
+                        $lt: new Date(numericYear, 0, 1)
+                    }
+                }
+            },
+            {
+                $group: {
+                    _id: { $month: "$date" },
+                    count: { $sum: 1 }
+                }
+            },
+            {
+                $sort: { _id: 1 }
+            }
+        ]);
+        return monthlyStats.map(entry => ({ month: entry._id + `/${year}`, count: entry.count }));
+    } catch (error) {
+        console.log("Lỗi trong getMonthlyStats():", error);
     }
 }
