@@ -23,4 +23,10 @@ router.post('/Seen', async function (req, res, next) {
     var data = await notificationController.updateSeen(req.body.id);
     res.json(data);
 });
+//send mess
+router.post('/mess', async function (req, res, next) {
+    console.log(req.body.id);
+    var data = await notificationController.mess(req.body.id);
+    res.json(data);
+});
 module.exports = router;

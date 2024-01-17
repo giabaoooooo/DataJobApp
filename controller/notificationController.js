@@ -30,32 +30,6 @@ exports.insert = async (receiver_id, sender_id, post_id, cv_id, category, seen) 
 }
 
 const sendNotification = async (data) => {
-    // console.log(data);
-    // const token = "e4E6pkKXQa2kyfYS8k_FM4:APA91bH96bVHymHUgPQbsw9e92Ptk6D1TvebB4u2VnmuGliMQj9iLmSbyylaE1VKcRkpwDamj_HVjRxKuF_SRJgQdwrdM1U6pmeCn3mM6KCf4ej_1vPDk6WdI9HNWVo_Cdf0nBxv38vS"
-    // if (data.category == 0) {
-    //     admin.messaging().send({
-    //         token: "",
-    //         data: {
-    //             customData: data.category + "",
-    //             id: '1',
-    //             ad: data.sender_id.displayName + "",
-    //             subTitle: "Nodejs"
-    //         }, 
-    //         android: {
-    //             notification: {
-    //                 body: data.sender_id.displayName + 'Đã ứng tuyển',
-    //                 title: 'Đơn ứng tuyển mới',
-    //                 color: "#fff566",
-    //                 priority: "high",
-    //                 sound: "default",
-    //                 vibrateTimingsMillis: [200, 500, 800],
-    //                 imageUrl: data.sender_id.photo,
-    //             }
-    //         }
-    //     }).then((msg) => {
-    //         console.log(msg);
-    //     })
-    // }
     const idReceiver = data.receiver_id;
     const idSender = data.sender_id;
     const category = data.category;
@@ -216,6 +190,64 @@ exports.updateSeen = async (id) => {
             seen: 1
         });
         return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.mess = async (id) => {
+    try {
+        const result = await userModel.find({ _id: id });
+        const messagingToken = result[0].messagingToken;
+        const data = JSON.stringify({
+            "registration_ids": [
+                messagingToken,
+            ],
+            "notification": {
+                'body': 'Bạn có tin nhắn mới',
+                'title': 'Thông báo từ Part Time Jobs',
+                'color': "#337BFF",
+                'priority': "high",
+                'sound': "default",
+                'vibrateTimingsMillis': [200, 500, 800],
+                'imageUrl': result[0].photo,
+            },
+            "data": {
+                'category': 5,
+                'role': result[0].role,
+            }
+        });
+
+
+        const options = {
+            hostname: 'fcm.googleapis.com',
+            path: '/fcm/send',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'key=AAAAi2XMxyg:APA91bH-FRApbC_AHFGwqjofdkWE2xKIFfHmwL7K93WuhP34Um8WjkfnD48BObq5oEmv7yL5mURLBTnFSAgrwKSkIulpDfoJYuDxmSBGUy2ucIKEzUp_3Vzh9f2bhayOgCFZpH5TvMUi' // Thêm khóa xác thực của bạn ở đây
+            }
+        };
+
+        const req = http.request(options, res => {
+            let responseData = '';
+
+            res.on('data', chunk => {
+                responseData += chunk;
+            });
+
+            res.on('end', () => {
+                console.log('Phản hồi từ server:', responseData);
+            });
+        });
+
+        req.on('error', error => {
+            console.error('Lỗi khi gửi yêu cầu:', error);
+        });
+
+        // Gửi dữ liệu trong yêu cầu
+        req.write(data);
+        req.end();
     } catch (error) {
         console.log(error);
     }
